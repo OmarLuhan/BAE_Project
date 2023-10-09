@@ -109,13 +109,14 @@ function mostrarModal(modelo = MODELO_BASE) {
     $("#txtPrecio").val(modelo.precio)
     $("#cboEstado").val(modelo.esActivo)
     $("#txtImagen").val("")
-    $("#imgProducto").attr("src", modelo.urlImagen)
+    $("#imgLibro").attr("src", modelo.urlImagen)
 
     $("#modalData").modal("show")
 }
 $("#btnNuevo").click(function () {
     mostrarModal();
 });
+debugger;
 $("#btnGuardar").click(function () {
     const inputs = $("input.input-validar").serializeArray();
     const imputs_sin_valor = inputs.filter((item) => item.value.trim() == "");
@@ -127,14 +128,14 @@ $("#btnGuardar").click(function () {
     };
     const modelo = structuredClone(MODELO_BASE);
     modelo["idLibro"] = parseInt($("#txtId").val());
-    modelo["isbn"] = parseInt($("#txtIsbn").val());
+    modelo["isbn"] = $("#txtIsbn").val();
     modelo["codigoBarra"] = $("#txtCodigoBarra").val();
     modelo["autor"] = $("#txtAutor").val();
     modelo["titulo"] = $("#txtTitulo").val();
     modelo["idEditorial"] = $("#cboEditorial").val();
     modelo["idGenero"] = $("#cboGenero").val();
-    modelo["pendientes"] = $("#txtPendientes").val();
-    modelo["precio"] = $("#txtPrecio").val();
+    modelo["pendientes"] =parseInt($("#txtPendientes").val());
+    modelo["precio"] =parseFloat($("#txtPrecio").val());
     modelo["esActivo"] = $("#cboEstado").val();
     const inputFoto = document.getElementById("txtImagen");
     const formData = new FormData();

@@ -9,7 +9,6 @@ using CapstoneG14.Services.Interfaces;
 
 namespace CapstoneG14.Controllers
 {
-
     public class AccesoController : Controller
     {
         private readonly IUsuarioService _usuarioService;
