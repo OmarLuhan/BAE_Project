@@ -59,7 +59,7 @@ namespace CapstoneG14.Services.Implementations
                 libro_editar.Pendientes = entidad.Pendientes;
                 libro_editar.Precio = entidad.Precio;
                 libro_editar.EsActivo = entidad.EsActivo;
-                if (libro_editar.NombreImagen == "")
+                if (libro_editar.NombreImagen == "" || libro_editar.NombreImagen == null)
                     libro_editar.NombreImagen = NombreImagen;
                 if (imagen != null)
                 {
