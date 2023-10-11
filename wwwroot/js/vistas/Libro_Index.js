@@ -6,7 +6,7 @@
     titulo:"",
     idEditorial:0,
     idGenero:0,
-    pendientes: 0,
+    pendiente: 0,
     urlImagen:"",
     precio: 0,
     esActivo: 1
@@ -60,7 +60,7 @@ $(document).ready(function () {
             { "data": "titulo" },
             { "data": "nombreEditorial" },
             { "data": "nombreGenero" },
-            { "data": "pendientes" },
+            { "data": "pendiente" },
             { "data": "precio" },
             {
                 "data": "esActivo", render: function (data) {
@@ -105,7 +105,7 @@ function mostrarModal(modelo = MODELO_BASE) {
     $("#txtTitulo").val(modelo.titulo)
     $("#cboEditorial").val(modelo.idEditorial == 0 ? $("#cboEditorial option:First") : modelo.idEditorial)
     $("#cboGenero").val(modelo.idGenero == 0 ? $("#cboGenero option:First") : modelo.idGenero)
-    $("#txtPendientes").val(modelo.pendientes)
+    $("#txtPendiente").val(modelo.pendiente)
     $("#txtPrecio").val(modelo.precio)
     $("#cboEstado").val(modelo.esActivo)
     $("#txtImagen").val("")
@@ -134,7 +134,7 @@ $("#btnGuardar").click(function () {
     modelo["titulo"] = $("#txtTitulo").val();
     modelo["idEditorial"] = $("#cboEditorial").val();
     modelo["idGenero"] = $("#cboGenero").val();
-    modelo["pendientes"] =parseInt($("#txtPendientes").val());
+    modelo["pendiente"] =parseInt($("#txtPendiente").val());
     modelo["precio"] =parseFloat($("#txtPrecio").val());
     modelo["esActivo"] = $("#cboEstado").val();
     const inputFoto = document.getElementById("txtImagen");

@@ -15,7 +15,7 @@ public partial class Libro
 
     public decimal? Precio { get; set; }
 
-    public int? Pendientes { get; set; }
+    public int? Pendiente { get; set; }
 
     public string? Autor { get; set; }
 

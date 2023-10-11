@@ -29,10 +29,9 @@ $(document).ready(function () {
         valorImpuesto = parseFloat(d.porcentajeImpuesto);
       }
     });
-
-  $("#cboBuscarProducto").select2({
+  $("#cboBuscarLibro").select2({
     ajax: {
-      url: "/Venta/ObtenerProductos",
+      url: "/Venta/ObtenerLibros",
       dataType: "json",
       constentType: "application/json; charset=utf-8",
       delay: 250,
@@ -44,11 +43,11 @@ $(document).ready(function () {
       processResults: function (data) {
         return {
           results: data.map((item) => ({
-            id: item.idProducto,
-            text: item.descripcion,
-
-            marca: item.marca,
-            categoria: item.nombreCategoria,
+            id: item.idLibro,
+            text: item.autor,
+            titulo: item.titulo,
+            editorial: item.nombreEditorial,
+            genero: item.nombreGenero,
             urlImagen: item.urlImagen,
             precio: parseFloat(item.precio),
           })),
@@ -56,7 +55,7 @@ $(document).ready(function () {
       },
     },
     language: "es",
-    placeholder: "Buscar Producto...",
+    placeholder: "Buscar Libro...",
     minimumInputLength: 1,
     templateResult: formatRepo,
   });
@@ -73,7 +72,7 @@ function formatRepo(data) {
                  <img style="height:60px;width:60px;margin-right:10px" src="${data.urlImagen}"/>
             </td>
             <td>
-                 <p style="font-weight:bolder;margin:2px"> ${data.marca}</p>
+                 <p style="font-weight:bolder;margin:2px"> ${data.titulo}</p>
                  <p style="margin:2px">${data.text}</p>
             </td>
         </tr>
@@ -85,22 +84,21 @@ function formatRepo(data) {
 $(document).on("select2:open", () => {
   document.querySelector(".select2-search__field").focus();
 });
-let productosParaVenta = [];
-$("#cboBuscarProducto").on("select2:select", function (e) {
+let librosParaVenta = [];
+$("#cboBuscarLibro").on("select2:select", function (e) {
   const data = e.params.data;
-  console.log(data);
-  let productoEncontrado = productosParaVenta.filter(
-    (p) => p.idProducto == data.id
+  let libroEncontrado = librosParaVenta.filter(
+    (l) => l.idLibro == data.id
   );
-  if (productoEncontrado.length > 0) {
-    $("#cboBuscarProducto").val("").trigger("change");
-    toastr.warning("", "El producto ya fue agregado");
+  if (libroEncontrado.length > 0) {
+    $("#cboBuscarLibro").val("").trigger("change");
+    toastr.warning("", "El libro ya fue agregado");
     return false;
   }
 
   swal(
     {
-      title: data.marca,
+      title: data.titulo,
       text: data.text,
       imageUrl: data.urlImagen,
       type: "input",
@@ -118,41 +116,42 @@ $("#cboBuscarProducto").on("select2:select", function (e) {
         toastr.warning("", "debe ingresar un valor numerico");
         return false;
       }
-      let producto = {
-        idProducto: data.id,
-        marcaProducto: data.marca,
-        descripcionProducto: data.text,
-        categoriaProducto: data.categoria,
+      let libro = {
+        idLibro: data.id,
+        autor: data.text,
+        titulo: data.titulo,
+        editorialProducto: data.editorial,
+        generoProducto: data.genero,
         cantidad: parseInt(valor),
         precio: data.precio.toString(),
         total: (parseFloat(valor) * data.precio).toString(),
       };
-      productosParaVenta.push(producto);
-      mostrarProducto_precios();
-      $("#cboBuscarProducto").val("").trigger("change");
+      librosParaVenta.push(libro);
+      mostrarLibro_precios();
+      $("#cboBuscarLibro").val("").trigger("change");
       swal.close();
     }
   );
 });
 
-function mostrarProducto_precios() {
+function mostrarLibro_precios() {
   let total = 0,
     igv = 0,
     subtotal = 0;
   let porcentaje = valorImpuesto / 100;
 
-  $("#tbProducto tbody").html("");
-  productosParaVenta.forEach((item) => {
+  $("#tbLibro tbody").html("");
+  librosParaVenta.forEach((item) => {
     total += parseFloat(item.total);
-    $("#tbProducto tbody").append(
+    $("#tbLibro tbody").append(
       $("<tr>").append(
         $("<td>").append(
           $("<button>")
             .addClass("btn btn-danger btn-eliminar btn-sm")
             .append($("<i>").addClass("fa fa-trash-alt"))
-            .data("idProducto", item.idProducto)
+            .data("idLibro", item.idLibro)
         ),
-        $("<td>").text(item.descripcionProducto),
+        $("<td>").text(item.titulo),
         $("<td>").text(item.cantidad),
         $("<td>").text(item.precio),
         $("<td>").text(item.total)
@@ -168,18 +167,26 @@ function mostrarProducto_precios() {
   $("#txtTotal").val(total.toFixed(2));
 }
 $(document).on("click", "button.btn-eliminar", function () {
-  const _idproducto = $(this).data("idProducto");
-  productosParaVenta = productosParaVenta.filter(
-    (p) => p.idProducto != _idproducto
+  const _idlibro = $(this).data("idLibro");
+  librosParaVenta = librosParaVenta.filter(
+    (l) => l.idLibro != _idlibro
   );
-  mostrarProducto_precios();
+  mostrarLibro_precios();
 });
 $("#btnTerminarVenta").click(function () {
-  if (productosParaVenta.length < 1) {
+  if (librosParaVenta.length < 1) {
     toastr.warning("", "debe ingresar productos");
     return;
   }
-  const vmDetalleVenta = productosParaVenta;
+  if($("#txtDocumentoCliente").val().trim() == ""){
+    toastr.warning("", "debe ingresar el documento del cliente");
+    return;
+  }
+  if(isNaN(parseInt($("#txtDocumentoCliente").val().trim()))){
+    toastr.warning("", "debe ingresar un valor numerico en el documento del cliente");
+    return;
+  }
+  const vmDetalleVenta = librosParaVenta;
   const venta = {
     idTipoDocumentoVenta: $("#cboTipoDocumentoVenta").val(),
     documentoCliente: $("#txtDocumentoCliente").val(),
@@ -201,8 +208,8 @@ $("#btnTerminarVenta").click(function () {
     })
     .then((responseJson) => {
       if (responseJson.estado) {
-        productosParaVenta = [];
-        mostrarProducto_precios();
+        librosParaVenta = [];
+        mostrarLibro_precios();
         $("#txtDocumentoCliente").val("");
         $("#txtNombreCliente").val("");
         $("#cboTipoDocumentoVenta").val(

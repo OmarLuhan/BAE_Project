@@ -104,6 +104,117 @@ namespace CapstoneG14.Utilities.AutoMapper
       opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Precio, new CultureInfo("es-PE")))
       );
       #endregion
+      #region TipoDocumento
+      CreateMap<TipoDocumentoVentum, VMTipoDocumentoVenta>().ReverseMap();
+      #endregion
+      #region Venta
+      CreateMap<Ventum, VMVenta>()
+          .ForMember(dest =>
+           dest.TipoDocumentoVenta,
+           opt => opt.MapFrom(origen => origen.IdTipoDocumentoVentaNavigation.Descripcion)
+           )
+          .ForMember(dest =>
+          dest.Usuario,
+          opt => opt.MapFrom(origen => origen.IdUsuarioNavigation.Nombre)
+          )
+          .ForMember(dest =>
+           dest.SubTotal,
+           opt => opt.MapFrom(origen => Convert.ToString(origen.SubTotal.Value, new CultureInfo("es-PE")))
+           )
+          .ForMember(dest =>
+           dest.ImpuestoTotal,
+           opt => opt.MapFrom(origen => Convert.ToString(origen.ImpuestoTotal.Value, new CultureInfo("es-PE")))
+           )
+           .ForMember(dest =>
+          dest.Total,
+         opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Total, new CultureInfo("es-PE")))
+         )
+           .ForMember(dest =>
+          dest.FechaRegistro,
+         opt => opt.MapFrom(origen => origen.FechaRegistro.Value.ToString("dd/MM/yyyy"))
+         );
+
+      CreateMap<VMVenta, Ventum>()
+
+         .ForMember(dest =>
+          dest.SubTotal,
+          opt => opt.MapFrom(origen => Convert.ToDecimal(origen.SubTotal, new CultureInfo("es-PE")))
+          )
+         .ForMember(dest =>
+          dest.ImpuestoTotal,
+          opt => opt.MapFrom(origen => Convert.ToDecimal(origen.ImpuestoTotal, new CultureInfo("es-PE")))
+          )
+          .ForMember(dest =>
+         dest.Total,
+        opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Total, new CultureInfo("es-PE")))
+        );
+      #endregion
+      #region DetalleVenta
+      CreateMap<DetalleVentum, VMDetalleVenta>()
+          .ForMember(dest =>
+           dest.Precio,
+           opt => opt.MapFrom(origen => Convert.ToString(origen.Precio.Value, new CultureInfo("es-PE")))
+            )
+          .ForMember(dest =>
+            dest.Total,
+            opt => opt.MapFrom(origen => Convert.ToString(origen.Total.Value, new CultureInfo("es-PE")))
+            );
+      CreateMap<VMDetalleVenta, DetalleVentum>()
+          .ForMember(dest =>
+           dest.Precio,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Precio, new CultureInfo("es-PE")))
+            )
+          .ForMember(dest =>
+            dest.Total,
+            opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Total, new CultureInfo("es-PE")))
+            );
+      CreateMap<DetalleVentum, VMReporteVenta>()
+          .ForMember(dest =>
+            dest.FechaReigstro,
+            opt => opt.MapFrom(origen => origen.IdVentaNavigation.FechaRegistro.Value.ToString("dd/MM/yyyy"))
+            )
+          .ForMember(dest =>
+            dest.NumeroVenta,
+            opt => opt.MapFrom(origen => origen.IdVentaNavigation.NumeroVenta)
+            )
+          .ForMember(dest =>
+            dest.TipoDocumento,
+            opt => opt.MapFrom(origen => origen.IdVentaNavigation.IdTipoDocumentoVentaNavigation.Descripcion)
+            )
+          .ForMember(dest =>
+            dest.TipoDocumentoCliente,
+            opt => opt.MapFrom(origen => origen.IdVentaNavigation.DocumentoCliente)
+            )
+          .ForMember(dest =>
+            dest.NombreCliente,
+            opt => opt.MapFrom(origen => origen.IdVentaNavigation.NombreCliente)
+            )
+          .ForMember(dest =>
+            dest.SubtotalVenta,
+            opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.SubTotal.Value, new CultureInfo("es-PE")))
+            )
+          .ForMember(dest =>
+            dest.ImpuestoTotalVenta,
+            opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.ImpuestoTotal.Value, new CultureInfo("es-PE")))
+            )
+          .ForMember(dest =>
+            dest.TotalVenta,
+            opt => opt.MapFrom(origen => Convert.ToString(origen.IdVentaNavigation.Total.Value, new CultureInfo("es-PE")))
+            )
+          .ForMember(dest =>
+            dest.Libro,
+            opt => opt.MapFrom(origen => origen.TituloLibro)
+            )
+          .ForMember(dest =>
+            dest.Precio,
+            opt => opt.MapFrom(origen => Convert.ToString(origen.Precio.Value, new CultureInfo("es-PE")))
+            )
+          .ForMember(dest =>
+            dest.Total,
+            opt => opt.MapFrom(origen => Convert.ToString(origen.Total.Value, new CultureInfo("es-PE")))
+            );
+
+      #endregion
     }
   }
 }

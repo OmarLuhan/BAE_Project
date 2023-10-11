@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace CapstoneG14.Models;
 
@@ -42,6 +44,7 @@ public partial class BaeContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     public virtual DbSet<Ventum> Venta { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Configuracion>(entity =>
@@ -66,7 +69,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<DetallePedido>(entity =>
         {
-            entity.HasKey(e => e.IdDetallePedido).HasName("PK__DetalleP__610F0056AA33D7CF");
+            entity.HasKey(e => e.IdDetallePedido).HasName("PK__DetalleP__610F0056E2F11041");
 
             entity.ToTable("DetallePedido");
 
@@ -100,7 +103,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<DetalleVentum>(entity =>
         {
-            entity.HasKey(e => e.IdDetalleVenta).HasName("PK__DetalleV__BFE2843F1A151ECB");
+            entity.HasKey(e => e.IdDetalleVenta).HasName("PK__DetalleV__BFE2843FCE7BFFE6");
 
             entity.Property(e => e.IdDetalleVenta).HasColumnName("idDetalleVenta");
             entity.Property(e => e.Cantidad).HasColumnName("cantidad");
@@ -132,7 +135,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Editorial>(entity =>
         {
-            entity.HasKey(e => e.IdEditorial).HasName("PK__Editoria__9DF182DB27F7BAE8");
+            entity.HasKey(e => e.IdEditorial).HasName("PK__Editoria__9DF182DBBF4597A6");
 
             entity.ToTable("Editorial");
 
@@ -150,7 +153,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Genero>(entity =>
         {
-            entity.HasKey(e => e.IdGenero).HasName("PK__Genero__85223DA3ADC6A316");
+            entity.HasKey(e => e.IdGenero).HasName("PK__Genero__85223DA357A0609A");
 
             entity.ToTable("Genero");
 
@@ -168,7 +171,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Libro>(entity =>
         {
-            entity.HasKey(e => e.IdLibro).HasName("PK__Libro__5BC0F026497607E2");
+            entity.HasKey(e => e.IdLibro).HasName("PK__Libro__5BC0F0266AFD9F65");
 
             entity.ToTable("Libro");
 
@@ -194,7 +197,7 @@ public partial class BaeContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("nombreImagen");
-            entity.Property(e => e.Pendientes).HasColumnName("pendientes");
+            entity.Property(e => e.Pendiente).HasColumnName("pendiente");
             entity.Property(e => e.Precio)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("precio");
@@ -217,7 +220,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Menu>(entity =>
         {
-            entity.HasKey(e => e.IdMenu).HasName("PK__Menu__C26AF4837566F1BF");
+            entity.HasKey(e => e.IdMenu).HasName("PK__Menu__C26AF4835C6C089B");
 
             entity.ToTable("Menu");
 
@@ -252,7 +255,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Negocio>(entity =>
         {
-            entity.HasKey(e => e.IdNegocio).HasName("PK__Negocio__70E1E107C1FAD30B");
+            entity.HasKey(e => e.IdNegocio).HasName("PK__Negocio__70E1E107ECCDBA7A");
 
             entity.ToTable("Negocio");
 
@@ -298,7 +301,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<NumeroCorrelativo>(entity =>
         {
-            entity.HasKey(e => e.IdNumeroCorrelativo).HasName("PK__NumeroCo__25FB547E76241C8B");
+            entity.HasKey(e => e.IdNumeroCorrelativo).HasName("PK__NumeroCo__25FB547E2BAEA002");
 
             entity.ToTable("NumeroCorrelativo");
 
@@ -316,7 +319,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Pedido>(entity =>
         {
-            entity.HasKey(e => e.IdPedido).HasName("PK__Pedido__A9F619B7DB20F82A");
+            entity.HasKey(e => e.IdPedido).HasName("PK__Pedido__A9F619B74979C705");
 
             entity.ToTable("Pedido");
 
@@ -353,7 +356,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Rol>(entity =>
         {
-            entity.HasKey(e => e.IdRol).HasName("PK__Rol__3C872F76B20AF1BB");
+            entity.HasKey(e => e.IdRol).HasName("PK__Rol__3C872F76D343B292");
 
             entity.ToTable("Rol");
 
@@ -371,7 +374,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<RolMenu>(entity =>
         {
-            entity.HasKey(e => e.IdRolMenu).HasName("PK__RolMenu__CD2045D8EF8AED6C");
+            entity.HasKey(e => e.IdRolMenu).HasName("PK__RolMenu__CD2045D81EA1C011");
 
             entity.ToTable("RolMenu");
 
@@ -395,7 +398,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<TipoDocumentoVentum>(entity =>
         {
-            entity.HasKey(e => e.IdTipoDocumentoVenta).HasName("PK__TipoDocu__A9D59AEE29B2FFA8");
+            entity.HasKey(e => e.IdTipoDocumentoVenta).HasName("PK__TipoDocu__A9D59AEE78FF77F9");
 
             entity.Property(e => e.IdTipoDocumentoVenta).HasColumnName("idTipoDocumentoVenta");
             entity.Property(e => e.Descripcion)
@@ -411,7 +414,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__645723A6113FBA88");
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__645723A6AB15E3EE");
 
             entity.ToTable("Usuario");
 
@@ -454,7 +457,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Ventum>(entity =>
         {
-            entity.HasKey(e => e.IdVenta).HasName("PK__Venta__077D5614A665A528");
+            entity.HasKey(e => e.IdVenta).HasName("PK__Venta__077D5614B8511E72");
 
             entity.Property(e => e.IdVenta).HasColumnName("idVenta");
             entity.Property(e => e.DocumentoCliente)

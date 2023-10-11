@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CapstoneG14.Models.ViewModels
 {
@@ -12,18 +8,18 @@ namespace CapstoneG14.Models.ViewModels
         public string? CodigoBarra { get; set; }
 
         public string? Isbn { get; set; }
-        
+
         public int? IdEditorial { get; set; }
         public string? NombreEditorial { get; set; }
 
         public int? IdGenero { get; set; }
         public string? NombreGenero { get; set; }
-        
+
         public string? Autor { get; set; }
-        
+
         public string? Titulo { get; set; }
 
-        public int? Pendientes { get; set; }
+        public int? Pendiente { get; set; }
 
         public string? UrlImagen { get; set; }
 

@@ -29,6 +29,8 @@ namespace CapstoneG14.Dependences
             service.AddScoped<IGeneroService, GeneroService>();
             service.AddScoped<IEditorialService, EditorialService>();
             service.AddScoped<ILibroService, LibroService>();
+            service.AddScoped<IVentaService, VentaService>();
+            service.AddScoped<ITipoDocumentoVentaService, TipoDocumentoVentaService>();
         }
     }
 

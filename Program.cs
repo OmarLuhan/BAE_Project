@@ -1,5 +1,8 @@
 using CapstoneG14.Dependences;
 using CapstoneG14.Utilities.AutoMapper;
+using CapstoneG14.Utilities.Extenciones;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +17,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 builder.Services.Injection(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+#region DinkToPdf
+// aqui se inyecta el assembly
+var context = new CustomAssemblyLoadContext();
+context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Utilities/LibreriaPDF/libwkhtmltox.dll"));
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
