@@ -5,8 +5,8 @@
 
 @section Styles {
     <!-- ============================================================
-                        =ESTILOS PARA ESTA PAGINA
-                        ===============================================================-->
+                                                        =ESTILOS PARA ESTA PAGINA
+                                                        ===============================================================-->
     <link href="~/vendor/select2/select2.min.css" rel="stylesheet">
     <style>
         .select2 {
@@ -27,13 +27,17 @@
                         </div>
                         <div class="card-body">
                             <div class="form-row">
-                                <div class="form-group col-sm-6">
+                                <div class="form-group col-sm-3">
                                     <input type="text" class="form-control form-control-sm" id="txtDocumentoCliente"
-                                        placeholder="numero documento">
+                                        placeholder="numero ruc">
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <input type="text" class="form-control form-control-sm" id="txtNombreCliente"
-                                        placeholder="nombre completo">
+                                    <input type="text" disabled class="form-control form-control-sm"
+                                        id="txtNombreCliente" placeholder="nombre completo">
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <button class="btn btn-success btn-block btn-sm" type="button" id="btnBuscar"><i
+                                            class="fas fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
@@ -142,8 +146,8 @@
 <!-- /.container-fluid -->
 @section Scripts {
     <!-- ============================================================
-                        =SCRIPTS PARA ESTA PAGINA
-                        ===============================================================-->
+                                                        =SCRIPTS PARA ESTA PAGINA
+                                                        ===============================================================-->
     <script src="~/vendor/select2/select2.min.js"></script>
     <script src="~/vendor/select2/es.min.js"></script>
     <script src="../js/vistas/Nueva_venta.js"></script>
