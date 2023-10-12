@@ -45,6 +45,10 @@ public partial class BaeContext : DbContext
 
     public virtual DbSet<Ventum> Venta { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=localhost;Database=BAE;TrustServerCertificate=true;Trusted_Connection=true;MultipleActiveResultSets=true;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Configuracion>(entity =>
@@ -474,7 +478,7 @@ public partial class BaeContext : DbContext
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("impuestoTotal");
             entity.Property(e => e.NombreCliente)
-                .HasMaxLength(20)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("nombreCliente");
             entity.Property(e => e.NumeroVenta)
