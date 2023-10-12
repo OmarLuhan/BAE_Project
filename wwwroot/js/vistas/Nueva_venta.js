@@ -29,6 +29,35 @@ $(document).ready(function () {
         valorImpuesto = parseFloat(d.porcentajeImpuesto);
       }
     });
+    $("#btnBuscar").click(function () {
+      let documento= $("#txtDocumentoCliente").val().trim();
+      if(documento == ""){
+        toastr.warning("", "debe ingresar el documento del cliente");
+        return;
+      }
+      if(isNaN(parseInt(documento))){
+        toastr.warning("", "debe ingresar un valor numérico en el documento del cliente");
+        return;
+      }
+      const api_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InY0MzcyODgzN0BnbWFpbC5jb20ifQ.qwmIuk4LueCl4XG802VV43uzJGleoAfztlS1n01uyC0";
+      $("#btnBuscar").LoadingOverlay("show");
+      fetch(`https://dniruc.apisperu.com/api/v1/ruc/${documento}?token=${api_token}`)
+        .then((response) => {
+          $("#btnBuscar").LoadingOverlay("hide");
+          return response.ok ? response.json() : Promise.reject(response);
+        })
+        .then((responseJson) => {
+          if(responseJson.razonSocial){
+            $("#txtNombreCliente").val(responseJson.razonSocial);
+          } else {
+            toastr.warning("", "No se encontró la razón social en la respuesta.");
+          }
+        })
+        .catch((error) => {
+          toastr.warning("", "El numero ingresado no es un documento RUC: ");
+        });
+    });
+    
   $("#cboBuscarLibro").select2({
     ajax: {
       url: "/Venta/ObtenerLibros",
@@ -60,10 +89,8 @@ $(document).ready(function () {
     templateResult: formatRepo,
   });
 });
-
 function formatRepo(data) {
   if (data.loading) return data.text;
-
   var contenedor = $(
     `
         <table width="100%">
@@ -119,9 +146,9 @@ $("#cboBuscarLibro").on("select2:select", function (e) {
       let libro = {
         idLibro: data.id,
         autor: data.text,
-        titulo: data.titulo,
-        editorialProducto: data.editorial,
-        generoProducto: data.genero,
+        tituloLibro: data.titulo,
+        editorialLibro: data.editorial,
+        generoLibro: data.genero,
         cantidad: parseInt(valor),
         precio: data.precio.toString(),
         total: (parseFloat(valor) * data.precio).toString(),
@@ -151,7 +178,7 @@ function mostrarLibro_precios() {
             .append($("<i>").addClass("fa fa-trash-alt"))
             .data("idLibro", item.idLibro)
         ),
-        $("<td>").text(item.titulo),
+        $("<td>").text(item.tituloLibro),
         $("<td>").text(item.cantidad),
         $("<td>").text(item.precio),
         $("<td>").text(item.total)
@@ -173,17 +200,15 @@ $(document).on("click", "button.btn-eliminar", function () {
   );
   mostrarLibro_precios();
 });
+
+
 $("#btnTerminarVenta").click(function () {
+  if($("#txtNombreCliente").val().trim() == ""){
+    toastr.warning("", "no ha ingresado el nombre de ningun cliente");
+    return;
+  }
   if (librosParaVenta.length < 1) {
     toastr.warning("", "debe ingresar productos");
-    return;
-  }
-  if($("#txtDocumentoCliente").val().trim() == ""){
-    toastr.warning("", "debe ingresar el documento del cliente");
-    return;
-  }
-  if(isNaN(parseInt($("#txtDocumentoCliente").val().trim()))){
-    toastr.warning("", "debe ingresar un valor numerico en el documento del cliente");
     return;
   }
   const vmDetalleVenta = librosParaVenta;
@@ -194,7 +219,7 @@ $("#btnTerminarVenta").click(function () {
     subTotal: $("#txtSubTotal").val(),
     impuestoTotal: $("#txtIGV").val(),
     total: $("#txtTotal").val(),
-    DetalleVenta: vmDetalleVenta,
+    detalleVenta: vmDetalleVenta,
   };
   $("#btnTerminarVenta").LoadingOverlay("show");
   fetch("/Venta/RegistrarVenta", {
