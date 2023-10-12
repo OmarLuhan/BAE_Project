@@ -116,7 +116,6 @@ function mostrarModal(modelo = MODELO_BASE) {
 $("#btnNuevo").click(function () {
     mostrarModal();
 });
-debugger;
 $("#btnGuardar").click(function () {
     const inputs = $("input.input-validar").serializeArray();
     const imputs_sin_valor = inputs.filter((item) => item.value.trim() == "");
