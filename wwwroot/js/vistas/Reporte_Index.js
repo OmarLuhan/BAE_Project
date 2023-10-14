@@ -21,7 +21,7 @@ $(document).ready(function () {
       { data: "subtotalVenta" },
       { data: "impuestoTotalVenta" },
       { data: "totalVenta" },
-      { data: "producto" },
+      { data: "libro" },
       { data: "cantidad" },
       { data: "precio" },
       { data: "total" },

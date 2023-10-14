@@ -59,9 +59,9 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Total de Productos
+                                Total de Libros
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProductos">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalLibros">0</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -80,9 +80,9 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Total de pedidos
+                                Pedidos restantes
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalPedidos">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="pedidosRestantes">0</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-tags fa-2x text-gray-300"></i>
@@ -118,12 +118,12 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 bg-second-primary">
-                    <h6 class="m-0 font-weight-bold text-white">Productos más vendidos</h6>
+                    <h6 class="m-0 font-weight-bold text-white">Libros más vendidos</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-pie" style="height: 350px !important ;">
-                        <canvas id="chartProductos"></canvas>
+                        <canvas id="chartLibros"></canvas>
                     </div>
                 </div>
             </div>
@@ -135,10 +135,10 @@
 
 @section Scripts {
     <!-- ============================================================
-                =SCRIPTS PARA ESTA PAGINA
-                ===============================================================-->
+                                                                                =SCRIPTS PARA ESTA PAGINA
+                                                                                ===============================================================-->
     <script src="~/vendor/chart.js/Chart.min.js"></script>
-    <script src="../js/Vistas/DashBoard_indexx.js"></script>
+    <script src="../js/Vistas/DashBoard_index.js"></script>
     <!-- SOLO ES DE EJEMPLO - IGNORAR -->
     @* <script src="~/js/vistas/chart-bar-demo.js"></script> *@
     @* <script src="~/js/vistas/chart-pie-demo.js"></script> *@

@@ -12,8 +12,8 @@ $(document).ready(function () {
         let d = responseJson.objeto;
         $("#totalVenta").text(d.totalVentas);
         $("#totalIngresos").text(d.totalIngresos);
-        $("#totalProductos").text(d.totalProductos);
-        $("#totalCategorias").text(d.totalCategorias);
+        $("#totalLibros").text(d.totalLibros);
+        $("#pedidosRestantes").text(d.pedidosRestantes);
         // grafico de barras
         let barchart_labels;
         let barchart_data;
@@ -39,14 +39,13 @@ $(document).ready(function () {
         }
         console.log(barchart_labels);
         //grafico de pie
-
         let piechart_labels;
         let piechart_data;
-        if (d.productosTopUltimaSemana.length > 0) {
+        if (d.librosTopUltimaSemana.length > 0) {
           piechart_labels = d.productosTopUltimaSemana.map((item) => {
             return item.producto;
           });
-          piechart_data = d.productosTopUltimaSemana.map((item) => {
+          piechart_data = d.librosTopUltimaSemana.map((item) => {
             return item.cantidad;
           });
         } else {
@@ -105,8 +104,8 @@ $(document).ready(function () {
         });
 
         // Pie Chart Example
-        let controlProducto = document.querySelector("#chartProductos");
-        let myPieChart = new Chart(controlProducto, {
+        let controlLibro = document.querySelector("#chartLibros");
+        let myPieChart = new Chart(controlLibro, {
           type: "doughnut",
           data: {
             labels: piechart_labels,

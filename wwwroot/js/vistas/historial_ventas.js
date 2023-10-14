@@ -97,7 +97,7 @@ $("#tbventa tbody").on("click", ".btn-info", function () {
   d.detalleVenta.forEach((item) => {
     $("#tbProductos tbody").append(
       $("<tr>").append(
-        $("<td>").text(item.descripcionProducto),
+        $("<td>").text(item.tituloLibro),
         $("<td>").text(item.cantidad),
         $("<td>").text(item.precio),
         $("<td>").text(item.total)
