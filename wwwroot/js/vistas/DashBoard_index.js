@@ -7,8 +7,6 @@ $(document).ready(function () {
     })
     .then((responseJson) => {
       if (responseJson.estado) {
-        //mostrar datos en las targetas
-        console.log(responseJson.estado);
         let d = responseJson.objeto;
         $("#totalVenta").text(d.totalVentas);
         $("#totalIngresos").text(d.totalIngresos);
@@ -37,13 +35,12 @@ $(document).ready(function () {
           ];
           barchart_data = [0, 0, 0, 0, 0, 0, 0];
         }
-        console.log(barchart_labels);
         //grafico de pie
         let piechart_labels;
         let piechart_data;
         if (d.librosTopUltimaSemana.length > 0) {
-          piechart_labels = d.productosTopUltimaSemana.map((item) => {
-            return item.producto;
+          piechart_labels = d.librosTopUltimaSemana.map((item) => {
+            return item.libro;
           });
           piechart_data = d.librosTopUltimaSemana.map((item) => {
             return item.cantidad;
@@ -61,7 +58,6 @@ $(document).ready(function () {
 
         // Bar Chart Example
         let controlVenta = document.querySelector("#chartVentas");
-        console.log(barchart_labels);
         let myBarChart = new Chart(controlVenta, {
           type: "bar",
           data: {
