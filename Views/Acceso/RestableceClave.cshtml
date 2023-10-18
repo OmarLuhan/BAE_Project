@@ -53,7 +53,6 @@
                                             <input type="email" class="form-control form-control-user" asp-for="Correo"
                                                 placeholder="Ingrese su correo" required="required">
                                         </div>
-
                                         @if (ViewData["Mensaje"] != null)
                                         {
                                             <div class="form-group">
@@ -62,6 +61,15 @@
                                                 </div>
                                             </div>
                                         }
+                                        @if (ViewData["MensajeInfo"] != null)
+                                        {
+                                            <div class="form-group">
+                                                <div class="alert alert-warning" role="alert">
+                                                    @ViewData["MensajeInfo"]
+                                                </div>
+                                            </div>
+                                        }
+
                                         @if (ViewData["MensajeError"] != null)
                                         {
                                             <div class="form-group">

@@ -22,7 +22,7 @@ namespace CapstoneG14.Controllers
         {
             ClaimsPrincipal claimUser = HttpContext.User;
             if (claimUser.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Dashboard");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace CapstoneG14.Controllers
                 IsPersistent = modelo.MantenerSesion
             };
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Dashboard");
         }
 
 
@@ -58,16 +58,28 @@ namespace CapstoneG14.Controllers
             try
             {
                 string urlPlantillaCorreo = $"{this.Request.Scheme}://{this.Request.Host}/Plantilla/RestablecerClavePlantilla?clave=[Clave]";
-                bool respuesta = await _usuarioService.RecuperarClave(modelo.Correo, urlPlantillaCorreo);
-                if (respuesta)
+                if (modelo.Correo == null)
                 {
-                    ViewData["Mensaje"] = "Se ha enviado un correo con las instrucciones para restablecer su clave";
+                    ViewData["MensajeInfo"] = "Ingrese su correo electrónico";
                     ViewData["MensajeError"] = null;
+                    ViewData["Mensaje"] = null;
                 }
                 else
                 {
-                    ViewData["Mensaje"] = null;
-                    ViewData["MensajeError"] = "Tenemos problemas para procesar su solicitud, por favor intente más tarde";
+                    bool respuesta = await _usuarioService.RecuperarClave(modelo.Correo, urlPlantillaCorreo);
+
+                    if (respuesta)
+                    {
+                        ViewData["Mensaje"] = "Se ha enviado un correo con las instrucciones para restablecer su clave";
+                        ViewData["MensajeInfo"] = null;
+                        ViewData["MensajeError"] = null;
+                    }
+                    else
+                    {
+                        ViewData["Mensaje"] = null;
+                        ViewData["MensajeInfo"] = null;
+                        ViewData["MensajeError"] = "Tenemos problemas para procesar su solicitud, por favor intente más tarde";
+                    }
                 }
 
             }
@@ -75,6 +87,7 @@ namespace CapstoneG14.Controllers
             {
                 ViewData["MensajeError"] = ex.Message;
                 ViewData["Mensaje"] = null;
+                ViewData["MensajeInfo"] = null;
             }
             return View();
         }
