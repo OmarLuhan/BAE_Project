@@ -51,7 +51,7 @@ $(document).ready(function () {
             { "data": "idLibro", "visible": false, "searchable": false },
             {
                 "data": "urlImagen", render: function (data) {
-                    return `<img style="height:60px" src=${data} class="rounded mx-auto d-block"/>`
+                    return `<img style="height:60px" src=${data} class="rounded mx-auto d-block"/>`;
                 }
             },
             { "data": "codigoBarra" },
