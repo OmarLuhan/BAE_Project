@@ -3,6 +3,7 @@ using AutoMapper;
 using CapstoneG14.Models;
 using CapstoneG14.Models.ViewModels;
 using CapstoneG14.Services.Interfaces;
+using CapstoneG14.Utilities.CustomFilter;
 using CapstoneG14.Utilities.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,7 @@ namespace CapstoneG14.Controllers
             _mapper = mapper;
             _editorialService = editorialService;
         }
+        [ClaimRequirement("Editorial", "Index")]
         [HttpGet("index")]
         public IActionResult Index()
         {

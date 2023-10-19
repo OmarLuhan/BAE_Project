@@ -7,6 +7,7 @@ using CapstoneG14.Models;
 using CapstoneG14.Utilities.Response;
 using CapstoneG14.Models.ViewModels;
 using CapstoneG14.Services.Interfaces;
+using CapstoneG14.Utilities.CustomFilter;
 
 namespace CapstoneG14.Controllers
 {
@@ -25,6 +26,7 @@ namespace CapstoneG14.Controllers
             _usuarioService = usuarioService;
 
         }
+        [ClaimRequirement("Usuario", "Index")]
         [HttpGet("Index")]
         public IActionResult Index()
         {

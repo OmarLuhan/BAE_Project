@@ -21,7 +21,6 @@ namespace CapstoneG14.Controllers
         {
             return View();
         }
-
         [HttpGet("ObtenerResumen")]
         public async Task<IActionResult> ObtenerResumen()
         {

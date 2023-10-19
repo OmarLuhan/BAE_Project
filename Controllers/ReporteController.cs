@@ -2,6 +2,7 @@
 using AutoMapper;
 using CapstoneG14.Models.ViewModels;
 using CapstoneG14.Services.Interfaces;
+using CapstoneG14.Utilities.CustomFilter;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace CapstoneG14.Controllers
             _ventaService = ventaService;
             _mapper = mapper;
         }
+        [ClaimRequirement("Reporte", "Index")]
         [HttpGet("Index")]
         public IActionResult Index()
         {
