@@ -97,7 +97,7 @@ $("#btnGuardar").click(function () {
   const inputs = $("input.input-validar").serializeArray();
   const imputs_sin_valor = inputs.filter((item) => item.value.trim() == "");
   if (imputs_sin_valor.length > 0) {
-    const mensaje = `Deve completar el campo:"${imputs_sin_valor[0].name}"`;
+    const mensaje = `Debe completar el campo:"${imputs_sin_valor[0].name}"`;
     toastr.warning("", mensaje);
     $(`input[name="${imputs_sin_valor[0].name}"]`).focus();
     return;
@@ -147,7 +147,7 @@ $("#btnGuardar").click(function () {
           tablaData.row(filaSeleccionada).data(responseJson.objeto).draw(false);
           filaSeleccionada = null;
           $("#modalData").modal("hide");
-          swal("listo!", "el usuario fue modificado", "success");
+          swal("Listo!", "el usuario fue modificado", "success");
         } else {
           swal("error!", responseJson.mensaje, "error");
         }
@@ -197,7 +197,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
           .then((responseJson) => {
             if (responseJson.estado) {
               tablaData.row(fila).remove().draw(false);
-              swal("listo!", "el usuario fue Eliminado", "success");
+              swal("Listo!", "el usuario fue Eliminado", "success");
             } else {
               swal("error!", responseJson.mensaje, "error");
             }

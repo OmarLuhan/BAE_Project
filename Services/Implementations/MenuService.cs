@@ -49,5 +49,26 @@ namespace CapstoneG14.Services.Implementations
 
             return menus;
         }
+
+        public async Task<bool> PermisoMenu(int idUsuario, string controlador, string accion)
+        {
+            IQueryable<Usuario> tblUsuario = await _usuarioRepository.Consultar(u => u.IdUsuario == idUsuario);
+            IQueryable<RolMenu> tblRolMenu = await _rolMenuRepository.Consultar();
+            IQueryable<Menu> tblMenu = await _menuRepository.Consultar();
+
+            Menu menu_encontrado = (from u in tblUsuario
+                                    join rm in tblRolMenu on u.IdRol equals rm.IdRol
+                                    join m in tblMenu on rm.IdMenu equals m.IdMenu
+                                    where m.Controlador == controlador && m.PaginaAccion == accion
+                                    select m).FirstOrDefault();
+            if (menu_encontrado != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

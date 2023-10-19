@@ -1,5 +1,6 @@
 using CapstoneG14.Models.ViewModels;
 using CapstoneG14.Services.Interfaces;
+using CapstoneG14.Utilities.CustomFilter;
 using CapstoneG14.Utilities.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace CapstoneG14.Controllers
         {
             _dashBoardService = dashBoardService;
         }
+        [ClaimRequirement("Dashboard", "Index")]
         [HttpGet("Index")]
         public IActionResult Index()
         {

@@ -4,6 +4,7 @@ using AutoMapper;
 using CapstoneG14.Models;
 using CapstoneG14.Models.ViewModels;
 using CapstoneG14.Services.Interfaces;
+using CapstoneG14.Utilities.CustomFilter;
 using CapstoneG14.Utilities.Response;
 using DinkToPdf;
 using DinkToPdf.Contracts;
@@ -31,12 +32,13 @@ namespace CapstoneG14.Controllers
             _converter = converter;
             _logger = logger;
         }
-
+        [ClaimRequirement("Venta", "NuevaVenta")]
         [HttpGet("NuevaVenta")]
         public IActionResult NuevaVenta()
         {
             return View();
         }
+        [ClaimRequirement("Venta", "HistorialVenta")]
         [HttpGet("HistorialVenta")]
         public IActionResult HistorialVenta()
         {

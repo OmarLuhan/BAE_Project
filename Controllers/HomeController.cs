@@ -28,6 +28,11 @@ public class HomeController : Controller
     {
         return View();
     }
+    [HttpGet("NoAutorizado")]
+    public IActionResult NoAutorizado()
+    {
+        return View();
+    }
     [HttpGet("Perfil")]
     public IActionResult Perfil()
     {

@@ -22,7 +22,7 @@ namespace CapstoneG14.Controllers
         {
             ClaimsPrincipal claimUser = HttpContext.User;
             if (claimUser.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "Home");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace CapstoneG14.Controllers
                 IsPersistent = modelo.MantenerSesion
             };
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-            return RedirectToAction("Index", "Dashboard");
+            return RedirectToAction("Index", "Home");
         }
 
 
