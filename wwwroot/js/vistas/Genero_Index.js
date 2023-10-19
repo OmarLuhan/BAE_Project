@@ -62,7 +62,7 @@ $("#btnNuevo").click(function () {
 });
 $("#btnGuardar").click(function () {
     if ($("#txtDescripcion").val().trim()=="") {
-        toastr.warning("", "debe completar el campo descripcion")
+        toastr.warning("", 'Debe completar el campo "Descripción"')
         $("#txtDescripcion").focus();
         return;
     }
@@ -103,7 +103,7 @@ $("#btnGuardar").click(function () {
                 tablaData.row(filaSeleccionada).data(responseJson.objeto).draw(false);
                 filaSeleccionada = null;
                 $("#modalData").modal("hide");
-                swal("listo!", "El genero ha sido modificado", "success");
+                swal("Listo!", "El Genero ha sido modificado", "success");
             } else {
                 swal("error!", responseJson.mensaje, "error");
             }
@@ -151,7 +151,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
                 }).then(responseJson => {
                     if (responseJson.estado) {
                         tablaData.row(fila).remove().draw(false);
-                        swal("listo!", "El genero fue eliminada", "success");
+                        swal("Listo!", "El genero fue eliminada", "success");
                     } else {
                         swal("error!", responseJson.mensaje, "error");
                     }

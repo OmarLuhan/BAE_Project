@@ -1,13 +1,12 @@
 
-describe('CP03 - Control de Usuarios', () => {
+describe('CP04 - Control de Usuarios', () => {
     beforeEach(()=>{
     cy.login();
+    cy.inUsuario();
     })
-    it('Listar usuarios', () => {
-        listar_usuario()
+    it('CP04-01 - Listar usuarios', () => {
     });
-    it('Crear usuario', () => {
-        listar_usuario()
+    it('CP04-02 - Crear usuario', () => {
         cy.get("#btnNuevo").click()
         cy.get("#btnGuardar").click()
         cy.get("#toast-container").should("contain", 'Debe completar el campo:"Nombre"')
@@ -31,8 +30,33 @@ describe('CP03 - Control de Usuarios', () => {
         cy.contains("Listo!").should("contain","Listo!")
         cy.contains("OK").click()
     });
-    it("Editar usuario", () => {
-        listar_usuario()
+    it('CP04-03 - UsuarioCorreoUnico', () => {
+        cy.get("#btnNuevo").click()
+        cy.get("#btnGuardar").click()
+        cy.get("#toast-container").should("contain", 'Debe completar el campo:"Nombre"')
+        cy.get("#txtNombre").type("Angie")
+        cy.wait(1000)
+        cy.get("#btnGuardar").click()
+        cy.get("#toast-container").should("contain", 'Debe completar el campo:"Correo"')
+        cy.get("#txtCorreo").type("jazper0208@gmail.com")
+        cy.wait(1000)
+        cy.get("#btnGuardar").click()
+        cy.get("#toast-container").should("contain", 'Debe completar el campo:"Telefono"')
+        cy.get("#txtTelefono").type("04417673")
+        cy.wait(1000)
+        cy.get("#cboRol").select("Empleado")
+        cy.wait(1000)
+        cy.get("#txtFoto").selectFile('anim/gifupdate.gif')
+        cy.wait(1000)
+        cy.get("#btnGuardar").click()
+        cy.get('.showSweetAlert', { timeout: 50000 }).should('exist');
+        cy.wait(1000)
+        cy.contains("Error!").should("contain","Error!")
+        cy.get(".text-muted").should("contain","El correo ya existe")
+        cy.contains("OK").click()
+        cy.wait(1000)
+    });
+    it("CP04-04 - Editar usuario", () => {
         cy.get(".dtr-control").first().click()
         cy.get(".btn-editar").first().click({force: true})
         cy.wait(1000)
@@ -51,8 +75,7 @@ describe('CP03 - Control de Usuarios', () => {
         cy.contains("Listo!").should("contain","Listo!")
         cy.contains("OK").click()
     });
-    it('Eliminar usuario', () => {
-        listar_usuario()
+    it('CP04-05 - Eliminar usuario', () => {
         cy.get(".dtr-control").first().click()
         cy.get(".btn-eliminar").first().click({force: true})
         cy.wait(1000)
@@ -65,14 +88,15 @@ describe('CP03 - Control de Usuarios', () => {
         cy.contains("Listo!").should("contain","Listo!")
         cy.contains("OK").click()
     });
-});
+    it('CP04-06 - Buscar usuario', () => {
+          cy.get('[type="search"]').type("supervisor")
+          cy.get(".odd").find("td").eq(1).should("contain", "supervisor")
+    });
 
-//Funciones
-//Funcion para listar usuarios
-function listar_usuario(){
-    cy.get("#accordionSidebar .nav-link").eq(1).click()
-    cy.get("#menucollapse1 .bg-white").find('a').first().should("contain", "Usuarios")
-    cy.get("#menucollapse1 .bg-white").find('a').last().should("contain", "Negocio")
-    cy.get("#menucollapse1 .bg-white").find('a').first().click()
-    cy.get(".card-header").find('h6').should("have.text", "Lista de Usuarios")
-}
+    it('CP04-07 - OrdenarUsuarioPorNombre', () => {
+        cy.get(".sorting").eq(1).click()
+        cy.get(".sorting").eq(1).should("have.class", "sorting_asc")
+        cy.get(".sorting").eq(1).click()
+        cy.get(".sorting").eq(1).should("have.class", "sorting_desc")
+    });
+});

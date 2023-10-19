@@ -4,7 +4,7 @@ describe('CP02 - Recuperar contraseña', () => {
         cy.visit("http://localhost:5000/")
         cy.get(".h4").should("have.text", "B.A.E Distribuidora")
     });
-    it('Recuperar contraseña incorrecto', () => {
+    it('CP02-01 - Recuperar contraseña incorrecto', () => {
         cy.get(".text-center .small").click()
         cy.get(".h4").should("have.text", "¿Olvidó su contraseña?")
         cy.get(".alert-warning").should("contain", "Ingrese su correo electrónico")
@@ -12,7 +12,7 @@ describe('CP02 - Recuperar contraseña', () => {
         cy.get(".btn-primary").click()
         cy.get(".alert-danger").should("contain", "No encontramos ningun usuario asociado al correo")
     });
-    it('Recuperar contraseña correcto', () => {
+    it('CP02-02 - Recuperar contraseña correcto', () => {
         cy.get(".text-center .small").click()
         cy.get(".h4").should("have.text", "¿Olvidó su contraseña?")
         cy.get(".alert-warning").should("contain", "Ingrese su correo electrónico")
