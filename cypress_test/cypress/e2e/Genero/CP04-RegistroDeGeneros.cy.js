@@ -1,10 +1,10 @@
-describe('CP06 - Registro de Generos', () => {
+describe('CP04 - Registro de Generos', () => {
     beforeEach(()=>{
         cy.login();
         cy.inGenero("Administrador");
     });
-    it('CP06-01 - Ingresar a Registro de Generos', () => {});
-    it('CP06-02 - Registrar Genero', () => {
+    it('CP04-01 - Ingresar a Registro de Generos', () => {});
+    it('CP04-02 - Registrar Genero', () => {
         cy.get("#btnNuevo").click();
         cy.get("#btnGuardar").click();
         cy.get("#toast-container").should("contain", 'Debe completar el campo "Descripción"')
@@ -14,7 +14,7 @@ describe('CP06 - Registro de Generos', () => {
         cy.get(".text-muted").should("contain","Genero creado")
         cy.contains("OK").click()
     });
-     it('CP06-03 - Actualizar Genero', () => {
+     it('CP04-03 - Actualizar Genero', () => {
         cy.get(".fa-pencil-alt").first().click();
         cy.get("#txtDescripcion").clear();
         cy.get("#btnGuardar").click();
@@ -25,7 +25,7 @@ describe('CP06 - Registro de Generos', () => {
         cy.get(".text-muted").should("contain","El Genero ha sido modificado")
         cy.contains("OK").click()
      });
-     it('CP06-04 - Eliminar Genero', () => {
+     it('CP04-04 - Eliminar Genero', () => {
         cy.get(".fa-trash-alt").first().click();
         cy.wait(1000)
         cy.get(".confirm").click()

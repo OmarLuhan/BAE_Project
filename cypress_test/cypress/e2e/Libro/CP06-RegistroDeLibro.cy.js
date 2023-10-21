@@ -3,8 +3,8 @@ describe('CP08-RegistroDeLibro', () => {
         cy.login();
         cy.inLibro("Administrador");
     });
-   it('CP08-01 - Lista de Libros', () => {});
-    it('CP08-02 - Registro de Libro', () => {
+   it('CP06-01 - Lista de Libros', () => {});
+    it('CP06-02 - Registro de Libro', () => {
         cy.get('#btnNuevo').click();
         cy.get("#btnGuardar").click();
         cy.get("#toast-container").should("contain", 'Debe completar el campo:"Codigo Barra"')
@@ -40,7 +40,7 @@ describe('CP08-RegistroDeLibro', () => {
         cy.contains("OK").click()
 
     });
-    it('CP08-03 - Actualizar Libro', () => {
+    it('CP06-03 - Actualizar Libro', () => {
         cy.get(".dtr-control").first().click()
         cy.get(".btn-editar").first().click({force: true})
         cy.get("#txtCodigoBarra").clear().type("10101010");
@@ -55,7 +55,7 @@ describe('CP08-RegistroDeLibro', () => {
         cy.get(".text-muted").should("contain","El libro fue modificado")
         cy.contains("OK").click()
     });
-     it('CP08-04 - Eliminar Libro', () => {
+     it('CP06-04 - Eliminar Libro', () => {
         cy.get(".dtr-control").first().click()
         cy.get(".btn-eliminar").first().click({force: true})
         cy.wait(1000)
@@ -64,7 +64,7 @@ describe('CP08-RegistroDeLibro', () => {
         cy.get(".text-muted").should("contain","El libro fue Eliminado")
         cy.contains("OK").click()
      });
-      it('CP08-05 - Buscar Libro', () => {
+      it('CP06-05 - Buscar Libro', () => {
         cy.get('[type="search"]').type("Brave")
         cy.get("#tbdata_info").should("contain", "Mostrando 1 a 1 de 1 registros")
       });

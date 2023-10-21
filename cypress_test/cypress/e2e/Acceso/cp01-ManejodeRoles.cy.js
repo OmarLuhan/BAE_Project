@@ -1,10 +1,10 @@
 
-describe('CP03 - Manejo de Roles', () => {
+describe('CP01 - Manejo de Roles', () => {
     beforeEach(() => {
         cy.visit("http://localhost:5000/")
         cy.get(".h4").should("have.text", "B.A.E Distribuidora")
     });
-    it('CP03-01 - Ingresar con usuario administrador', () => {
+    it('CP01-01 - Ingresar con usuario administrador', () => {
         cy.login();
         cy.get("#accordionSidebar").should("be.visible")
         cy.get("#accordionSidebar").find(".nav-item").should("have.length", 6)
@@ -20,7 +20,7 @@ describe('CP03 - Manejo de Roles', () => {
         cy.get(".dropdown-item").first().click()
         cy.get("#txtRol").should("have.value", "Administrador")
     });
-   it('CP03-02 - Ingresar con usuario supervisor', () => {
+   it('CP01-02 - Ingresar con usuario supervisor', () => {
     cy.get("#Correo").type("vapsukedre@gufum.com")
     cy.get("#Clave").type("123")
     cy.get(".btn").click()
@@ -47,7 +47,7 @@ describe('CP03 - Manejo de Roles', () => {
     cy.get(".dropdown-item").first().click()
     cy.get("#txtRol").should("have.value", "Supervisor")
      });
-it('CP03-03 - Ingresar con usuario empleado', () => {
+it('CP01-03 - Ingresar con usuario empleado', () => {
     cy.get("#Correo").type("jorzopomlo@gufum.com")
     cy.get("#Clave").type("123")
     cy.get(".btn").click()

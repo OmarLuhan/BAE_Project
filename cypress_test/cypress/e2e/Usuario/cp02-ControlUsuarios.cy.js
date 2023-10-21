@@ -1,12 +1,12 @@
 
-describe('CP04 - Control de Usuarios', () => {
+describe('CP02 - Control de Usuarios', () => {
     beforeEach(()=>{
     cy.login();
     cy.inUsuario();
     })
-    it('CP04-01 - Listar usuarios', () => {
+    it('CP02-01 - Listar usuarios', () => {
     });
-    it('CP04-02 - Crear usuario', () => {
+    it('CP02-02 - Crear usuario', () => {
         cy.get("#btnNuevo").click()
         cy.get("#btnGuardar").click()
         cy.get("#toast-container").should("contain", 'Debe completar el campo:"Nombre"')
@@ -30,7 +30,7 @@ describe('CP04 - Control de Usuarios', () => {
         cy.contains("Listo!").should("contain","Listo!")
         cy.contains("OK").click()
     });
-    it('CP04-03 - UsuarioCorreoUnico', () => {
+    it('CP02-03 - UsuarioCorreoUnico', () => {
         cy.get("#btnNuevo").click()
         cy.get("#btnGuardar").click()
         cy.get("#toast-container").should("contain", 'Debe completar el campo:"Nombre"')
@@ -56,7 +56,7 @@ describe('CP04 - Control de Usuarios', () => {
         cy.contains("OK").click()
         cy.wait(1000)
     });
-    it("CP04-04 - Editar usuario", () => {
+    it("CP02-04 - Editar usuario", () => {
         cy.get(".dtr-control").first().click()
         cy.get(".btn-editar").first().click({force: true})
         cy.wait(1000)
@@ -75,7 +75,7 @@ describe('CP04 - Control de Usuarios', () => {
         cy.contains("Listo!").should("contain","Listo!")
         cy.contains("OK").click()
     });
-    it('CP04-05 - Eliminar usuario', () => {
+    it('CP02-05 - Eliminar usuario', () => {
         cy.get(".dtr-control").first().click()
         cy.get(".btn-eliminar").first().click({force: true})
         cy.wait(1000)
@@ -88,12 +88,12 @@ describe('CP04 - Control de Usuarios', () => {
         cy.contains("Listo!").should("contain","Listo!")
         cy.contains("OK").click()
     });
-    it('CP04-06 - Buscar usuario', () => {
+    it('CP02-06 - Buscar usuario', () => {
           cy.get('[type="search"]').type("supervisor")
           cy.get(".odd").find("td").eq(1).should("contain", "supervisor")
     });
 
-    it('CP04-07 - OrdenarUsuarioPorNombre', () => {
+    it('CP02-07 - OrdenarUsuarioPorNombre', () => {
         cy.get(".sorting").eq(1).click()
         cy.get(".sorting").eq(1).should("have.class", "sorting_asc")
         cy.get(".sorting").eq(1).click()

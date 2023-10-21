@@ -117,14 +117,46 @@ $("#btnNuevo").click(function () {
     mostrarModal();
 });
 $("#btnGuardar").click(function () {
+   
+    if(isNaN($("#txtCodigoBarra").val())){
+        toastr.warning("", "El codigo de barra debe estar compuesto por numeros");
+        $("#txtCodigoBarra").focus();
+        return;
+    };
+    if(isNaN($("#txtIsbn").val())){
+        toastr.warning("", "El ISBN debe estar compuesto por numeros");
+        $("#txtIsbn").focus();
+        return;
+    };
+    if(isNaN($("#txtPendiente").val())){
+        toastr.warning("", "El campo pendientes de entrega debe ser un numero");
+        $("#txtPendiente").focus();
+        return;
+    };
+    if(isNaN($("#txtPrecio").val())){
+        toastr.warning("", "El campo precio debe ser un numero");
+        $("#txtPrecio").focus();
+        return;
+    };
     const inputs = $("input.input-validar").serializeArray();
     const imputs_sin_valor = inputs.filter((item) => item.value.trim() == "");
     if (imputs_sin_valor.length > 0) {
-        const mensaje = `Deve completar el campo:"${imputs_sin_valor[0].name}"`;
+        const mensaje = `Debe completar el campo:"${imputs_sin_valor[0].name}"`;
         toastr.warning("", mensaje)
         $(`input[name="${imputs_sin_valor[0].name}"]`).focus();
         return;
     };
+    if($("#cboEditorial").val() == null){
+        toastr.warning("", 'Debe seleccionar una Editorial');
+        $("#cboEditorial").focus();
+        return;
+    };
+    if($("#cboGenero").val() == null){
+        toastr.warning("", "Debe seleccionar un Genero");
+        $("#cboGenero").focus();
+        return;
+    };
+    
     const modelo = structuredClone(MODELO_BASE);
     modelo["idLibro"] = parseInt($("#txtId").val());
     modelo["isbn"] = $("#txtIsbn").val();
@@ -169,9 +201,9 @@ $("#btnGuardar").click(function () {
                 tablaData.row(filaSeleccionada).data(responseJson.objeto).draw(false);
                 filaSeleccionada = null;
                 $("#modalData").modal("hide");
-                swal("listo!", "el libro fue modificado", "success");
+                swal("Listo!", "El libro fue modificado", "success");
             } else {
-                swal("error!", responseJson.mensaje, "hubo un problema al modificar el libro intente de nuevo");
+                swal("Error!", responseJson.mensaje, "hubo un problema al modificar el libro intente de nuevo");
             }
         });
 
@@ -218,9 +250,9 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
                 }).then(responseJson => {
                     if (responseJson.estado) {
                         tablaData.row(fila).remove().draw(false);
-                        swal("listo!", "el libro fue Eliminado", "success");
+                        swal("Listo!", "El libro fue Eliminado", "success");
                     } else {
-                        swal("error!", responseJson.mensaje, "error");
+                        swal("Error!", responseJson.mensaje, "error");
                     }
                 });
             }

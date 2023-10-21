@@ -32,11 +32,11 @@ $(document).ready(function () {
     $("#btnBuscar").click(function () {
       let documento= $("#txtDocumentoCliente").val().trim();
       if(documento == ""){
-        toastr.warning("", "debe ingresar el documento del cliente");
+        toastr.warning("", "Debe completar el campo RUC");
         return;
       }
       if(isNaN(parseInt(documento))){
-        toastr.warning("", "debe ingresar un valor numérico en el documento del cliente");
+        toastr.warning("", "El campo RUC debe ser numerico");
         return;
       }
       const api_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InY0MzcyODgzN0BnbWFpbC5jb20ifQ.qwmIuk4LueCl4XG802VV43uzJGleoAfztlS1n01uyC0";

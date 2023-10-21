@@ -106,4 +106,21 @@ Cypress.Commands.add('inHistorialVenta', (rol) => {
     }
     
 });
-Cypress.Commands.add('inReporte', () => {});
+Cypress.Commands.add('inReporte', () => {
+    cy.get("#accordionSidebar").find(".nav-item").eq(5).click()
+    cy.get("#accordionSidebar").find(".nav-item").eq(5).find("a").last().click()
+    cy.get(".m-0").should("have.text", "Reporte de Ventas")
+});
+
+Cypress.Commands.add('addLibro', (name,cant) => {
+    cy.get("#select2-cboBuscarLibro-container").click()
+        cy.get(".select2-search__field").type(name)
+        cy.wait(500)
+        cy.get(".select2-results__option").first().click()
+        cy.get('[placeholder="Ingrese Cantidad"]').type("test")
+        cy.wait(500)
+        cy.get(".confirm ").click()
+        cy.get("#toast-container").should("contain", 'debe ingresar un valor numerico')
+        cy.get('[placeholder="Ingrese Cantidad"]').clear().type(cant)
+        cy.get(".confirm ").click()
+});
