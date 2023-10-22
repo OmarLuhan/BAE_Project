@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  web_bae:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - sql_bae
+
+  sql_bae:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Password*1"    
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-data-bae:/var/opt/mssql
+
+volumes:
+  sql-data-bae:
