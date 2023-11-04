@@ -16,7 +16,7 @@ namespace CapstoneG14.Services.Implementations
         }
         public async Task<Libro> Crear(Libro entidad, Stream? imagen = null, string NombreImagen = "")
         {
-            Libro? libro_existe = await _libroRepository.Obtener(l => l.CodigoBarra == entidad.CodigoBarra && l.Isbn == entidad.Isbn);
+            Libro? libro_existe = await _libroRepository.Obtener(l => l.CodigoBarra == entidad.CodigoBarra || l.Isbn == entidad.Isbn);
             if (libro_existe != null)
                 throw new TaskCanceledException("El codigo de barras o el isbn ya existe");
             try

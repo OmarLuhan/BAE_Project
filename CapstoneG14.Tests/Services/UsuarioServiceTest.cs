@@ -3,6 +3,7 @@ using CapstoneG14.Services.Implementations;
 using CapstoneG14.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using NuGet.Frameworks;
 using static CapstoneG14.Repositories.Interfaces.IGenericRepository;
 
 namespace CapstoneG14.Tests.Services
@@ -208,6 +209,104 @@ namespace CapstoneG14.Tests.Services
         }
         #endregion ObtenerPorID
         #region CrearUsuario
+
+        [Fact]
+        public async Task Crear_Usuario_DatosCoreectos()
+        {
+            var usuario_crear = new Usuario
+            {
+                Nombre = "Test",
+                Correo = "test1@test.com",
+                Telefono = "123456779",
+                IdRol = 1,
+                UrlFoto = "",
+                NombreFoto = "",
+                Clave = "",
+                EsActivo = true,
+                FechaRegistro = DateTime.Now
+            };
+            var usuario_esperado = new Usuario
+            {
+                IdUsuario = 1,
+                Nombre = "Test",
+                Correo = "test1@test.com",
+                Telefono = "123456779",
+                IdRol = 1,
+                UrlFoto = "",
+                NombreFoto = "",
+                Clave = "",
+                EsActivo = true,
+                FechaRegistro = DateTime.Now,
+                IdRolNavigation = new Rol { IdRol = 1, Descripcion = "Administrador" }
+            };
+            _mockRepo.Setup(r => r.Obtener(u => u.Correo == usuario_crear.Correo))
+               .ReturnsAsync((Usuario)null); // Simula que no se encontró un usuario existente
+            _mockUtilidadesService.Setup(u => u.GenerarClave()).Returns("ClaveGenerada");
+            _mockUtilidadesService.Setup(u => u.ConvertirSha256("ClaveGenerada")).Returns("ClaveEncriptada");
+            usuario_crear.Clave = "ClaveEncriptada";
+            _mockRepo.Setup(r => r.Create(usuario_crear)).ReturnsAsync(usuario_esperado);
+            _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == usuario_esperado.IdUsuario))
+                                    .ReturnsAsync(new List<Usuario> { usuario_esperado }.AsQueryable());
+
+
+            var result = await _usuarioService.Crear(usuario_crear, Stream.Null, "", "");
+            Assert.Equal(usuario_esperado.IdUsuario, result.IdUsuario);
+            Assert.NotNull(result.IdRolNavigation);
+            _mockRepo.Verify(r => r.Create(It.Is<Usuario>(u => u.Correo == usuario_crear.Correo && u.Clave == usuario_crear.Clave)), Times.Once);
+            _mockRepo.Verify(r => r.Consultar(u => u.IdUsuario == usuario_esperado.IdUsuario), Times.Once);
+
+        }
+        [Fact]
+        public async Task Crear_100_Usuario_DatosCoreectos()
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                var usuario_crear = new Usuario
+                {
+                    Nombre = "Test",
+                    Correo = "test1@test.com" + i,
+                    Telefono = "123456779",
+                    IdRol = 1,
+                    UrlFoto = "",
+                    NombreFoto = "",
+                    Clave = "",
+                    EsActivo = true,
+                    FechaRegistro = DateTime.Now
+                };
+                var usuario_esperado = new Usuario
+                {
+                    IdUsuario = i,
+                    Nombre = "Test",
+                    Correo = "test1@test.com" + i,
+                    Telefono = "123456779",
+                    IdRol = 1,
+                    UrlFoto = "",
+                    NombreFoto = "",
+                    Clave = "",
+                    EsActivo = true,
+                    FechaRegistro = DateTime.Now,
+                    IdRolNavigation = new Rol { IdRol = i, Descripcion = "Administrador" + i }
+                };
+                _mockRepo.Setup(r => r.Obtener(u => u.Correo == usuario_crear.Correo))
+              .ReturnsAsync((Usuario)null); // Simula que no se encontró un usuario existente
+                _mockUtilidadesService.Setup(u => u.GenerarClave()).Returns("ClaveGenerada");
+                _mockUtilidadesService.Setup(u => u.ConvertirSha256("ClaveGenerada")).Returns("ClaveEncriptada");
+                usuario_crear.Clave = "ClaveEncriptada";
+                _mockRepo.Setup(r => r.Create(usuario_crear)).ReturnsAsync(usuario_esperado);
+                _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == usuario_esperado.IdUsuario))
+                                        .ReturnsAsync(new List<Usuario> { usuario_esperado }.AsQueryable());
+
+
+                var result = await _usuarioService.Crear(usuario_crear, Stream.Null, "", "");
+                Assert.Equal(usuario_esperado.IdUsuario, result.IdUsuario);
+                Assert.NotNull(result.IdRolNavigation);
+                _mockRepo.Verify(r => r.Create(It.Is<Usuario>(u => u.Correo == usuario_crear.Correo && u.Clave == usuario_crear.Clave)), Times.Once);
+                _mockRepo.Verify(r => r.Consultar(u => u.IdUsuario == usuario_esperado.IdUsuario), Times.Once);
+            }
+
+
+
+        }
         [Fact]
         public async Task Crear_100UsuarioExistes_Return_Exepction()
         {
@@ -434,16 +533,21 @@ namespace CapstoneG14.Tests.Services
                 _mockFirebaseService.Verify(f => f.EliminarStorage("carpeta_usuario", nombreFoto), Times.Once);
             }
         }
-        //[Fact]
+        // [Fact]
         // public async Task Eliminar_100_UsuarioNoExistente_DebeLanzarExcepcion()
         // {
         //     for (int i = 0; 1 < 2; i++)
         //     {
         //         int idUsuario = i;
-        //         _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario))
-        //                  .ReturnsAsync(() => null);
-        //         await Assert.ThrowsAsync<TaskCanceledException>(
-        //             async () => await _usuarioService.Eliminar(idUsuario));
+        //         _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario)).ReturnsAsync((Usuario)null);
+        //         try
+        //         {
+        //             await _usuarioService.Eliminar(idUsuario);
+        //         }
+        //         catch (Exception e)
+        //         {
+        //             Assert.Equal("No se encontro el usuario", e.Message);
+        //         }
         //     }
         // }
         #endregion EliminarUsuario
