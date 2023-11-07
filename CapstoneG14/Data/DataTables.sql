@@ -66,7 +66,7 @@ CodigoBarra varchar(50),
 isbn varchar(50),
 Titulo varchar(100),
 precio decimal(10,2),
-pendientes int,
+pendiente int,
 Autor varchar(50),
 urlImagen varchar(500),
 nombreImagen varchar(100),
@@ -121,15 +121,23 @@ total decimal(10,2)
 )
 go
 
+create table Tienda(
+idTienda int primary key identity(1,1),
+descripcion varchar(50),
+esActivo bit,
+fechaRegistro datetime default getdate()
+)
+go
+
 create table Pedido(
 idPedido int primary key identity(1,1),
 numeroPedido varchar(6),
 idUsuario int references Usuario(idUsuario),
-documentoCliente varchar(10),
-nombreCliente varchar(20),
+idTienda int references Tienda (idTienda),
 subTotal decimal(10,2),
 impuestoTotal decimal(10,2),
 Total decimal(10,2),
+estado bit,
 fechaRegistro datetime default getdate()
 )
 go
@@ -143,7 +151,7 @@ tituloLibro varchar(100),
 generoLibro varchar(100),
 cantidad int,
 precio decimal(10,2),
-total decimal(10,2)
+total decimal(10,2),
 )
 go
 

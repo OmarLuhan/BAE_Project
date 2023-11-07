@@ -63,7 +63,7 @@ $(document).ready(function () {
       url: "/Venta/ObtenerLibros",
       dataType: "json",
       constentType: "application/json; charset=utf-8",
-      delay: 250,
+      delay: 200,
       data: function (params) {
         return {
           busqueda: params.term,

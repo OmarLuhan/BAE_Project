@@ -77,7 +77,7 @@ namespace CapstoneG14.Services.Implementations
                         }
                     }
                     if (htmlCorreo != "")
-                        await _correoService.EnviarCorreo(usuario_creado.Correo, "Cuenta creada Bienvenido a store_code", htmlCorreo);
+                        await _correoService.EnviarCorreo(usuario_creado.Correo, "Cuenta creada Bienvenido a BAE", htmlCorreo);
                 }
                 IQueryable<Usuario> query = await _repositorio.Consultar(u => u.IdUsuario == usuario_creado.IdUsuario);
                 usuario_creado = query.Include(r => r.IdRolNavigation).First();

@@ -16,18 +16,18 @@ insert into Usuario(nombre,correo,telefono,idRol,urlFoto,nombreFoto,clave,esActi
 --(AQUI DEBES INCLUIR TUS PROPIAS CLAVES Y CRENDENCIALES)
 
 insert into Configuracion(recurso,propiedad,valor) values
-('FireBase_Storage','email','v43728837@gmail.com'),
+('FireBase_Storage','email','emailautorizado@gmail.com'),
 ('FireBase_Storage','clave','usuario123456789'),
-('FireBase_Storage','ruta','ventasasp-8d05c.appspot.com'),
-('FireBase_Storage','api_key','AIzaSyDtIH3_A6mt9YAYTwIBt9Z4D-UIkqI9ZFA'),
+('FireBase_Storage','ruta','ventasasp-654.appspot.com'),
+('FireBase_Storage','api_key','AIzaSyDtIH3_BADYTwIBt9Z4D-UIkqI9ZFA'),
 ('FireBase_Storage','carpeta_usuario','IMAGENES_USUARIO'),
 ('FireBase_Storage','carpeta_producto','IMAGENES_PRODUCTO'),
 ('FireBase_Storage','carpeta_logo','IMAGENES_LOGO')
 
 insert into Configuracion(recurso,propiedad,valor) values
-('Servicio_Correo','correo','v43728837@gmail.com'),
+('Servicio_Correo','correo','serviciocorreo@gmail.com'),
 ('Servicio_Correo','clave','cpznvfbofjbrvxxx'),
-('Servicio_Correo','alias','Store.com'),
+('Servicio_Correo','alias','alias'),
 ('Servicio_Correo','host','smtp.gmail.com'),
 ('Servicio_Correo','puerto','587')
 
@@ -39,28 +39,28 @@ insert into Negocio(idNegocio,urlLogo,nombreLogo,numeroDocumento,nombre,correo,d
 values(1,'','','','','','','',0,'')
 
 
---________________________________ INSERTAR GÉNEROS ________________________________
+--________________________________ INSERTAR G NEROS ________________________________
 
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Ficción', 1);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('No Ficción', 1);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Ciencia Ficción', 1);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Fantasía', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('FicciÃ³n', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('No FicciÃ³n', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('Ciencia FicciÃ³n', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('FantasÃ­a', 1);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Romance', 1);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Terror', 0);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Histórico', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('Historico', 1);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Misterio', 1);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Biografía', 1);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Autobiografía', 0);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Poesía', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('BiografÃ­a', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('AutobiografÃ­a', 0);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('PoesÃ­a', 1);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Infantil', 1);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Juvenil', 1);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Autoayuda', 0);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Viajes', 1);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Ciencias Naturales', 0);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Filosofía', 1);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Religión', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('Filosof a', 1);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('Religi n', 1);
 INSERT INTO Genero (descripcion, esActivo) VALUES ('Arte', 1);
-INSERT INTO Genero (descripcion, esActivo) VALUES ('Política', 0);
+INSERT INTO Genero (descripcion, esActivo) VALUES ('Politica', 0);
 
 --________________________________ INSERTAR EDITORIALES ________________________________
 INSERT INTO Editorial (descripcion, esActivo) VALUES ('Penguin Random House', 1);
@@ -105,13 +105,13 @@ INSERT INTO Editorial (descripcion, esActivo) VALUES ('Abrams Books', 0);
 INSERT INTO Editorial (descripcion, esActivo) VALUES ('Baen Books', 1);
 INSERT INTO Editorial (descripcion, esActivo) VALUES ('Candlewick Press', 0);
 
---________________________________ INSERTAR GÉNEROS ________________________________
+--________________________________ INSERTAR G NEROS ________________________________
 insert into Libro
-(CodigoBarra, isbn, Titulo, precio, pendientes, Autor, idGenero, idEditorial, esActivo)
+(CodigoBarra, isbn, Titulo, precio, pendiente, Autor, idGenero, idEditorial, esActivo)
 values 
 ('9780451524935', '0451524934', '1984', 123.45, 0, 'George Orwell', 12, 27, 1)
 insert into Libro
-(CodigoBarra, isbn, Titulo, precio, pendientes, Autor, idGenero, idEditorial, esActivo)
+(CodigoBarra, isbn, Titulo, precio, pendiente, Autor, idGenero, idEditorial, esActivo)
 values 
 ('9780451524936', '0451524935', 'Brave New World', 89.90, 0, 'Aldous Huxley', 3, 15, 1),
 ('9780451524937', '0451524936', 'To Kill a Mockingbird', 67.50, 0, 'Harper Lee', 7, 21, 1),
@@ -130,8 +130,8 @@ values
 ('9780451524950', '0451524949', 'Anna Karenina', 119.60, 0, 'Leo Tolstoy', 18, 23, 1),
 ('9780451524951', '0451524950', 'The Lord of the Rings', 105.30, 0, 'J.R.R. Tolkien', 19, 3, 1),
 ('9780451524952', '0451524951', 'A Tale of Two Cities', 73.90, 0, 'Charles Dickens', 5, 11, 1),
-('9780451524953', '0451524952', 'The Little Prince', 59.90, 0, 'Antoine de Saint-Exupéry', 17, 35, 1),
-('9780451524954', '0451524953', 'Wuthering Heights', 96.20, 0, 'Emily Brontë', 15, 14, 1);
+('9780451524953', '0451524952', 'The Little Prince', 59.90, 0, 'Antoine de Saint-Exup ry', 17, 35, 1),
+('9780451524954', '0451524953', 'Wuthering Heights', 96.20, 0, 'Emily Bront ', 15, 14, 1);
 
 
 --________________________________ INSERTAR TIPO DOCUMENTO VENTA ________________________________
