@@ -12,6 +12,19 @@ $(document).ready(function () {
         });
       }
     });
+  fetch("/Venta/ListaTipoDocumentoVenta")
+    .then((response) => {
+      return response.ok ? response.json() : Promise.reject(response);
+    })
+    .then((responseJson) => {
+      if (responseJson.length > 0) {
+        responseJson.forEach((item) => {
+          $("#cboTipoDocumentoVenta").append(
+            $("<option>").val(item.idTipoDocumentoVenta).text(item.descripcion)
+          );
+        });
+      }
+    });
   $("#cboBuscarLibro").select2({
     ajax: {
       url: "/Venta/ObtenerLibros",
@@ -62,4 +75,91 @@ $(document).ready(function () {
     );
     return contenedor;
   }
+  $(document).on("select2:open", () => {
+    document.querySelector(".select2-search__field").focus();
+  });
+  let librosParaPedido = [];
+  $("#cboBuscarLibro").on("select2:select", function (e) {
+    const data = e.params.data;
+    let libroEncontrado = librosParaPedido.filter((l) => l.idLibro == data.id);
+    if (libroEncontrado.length > 0) {
+      $("#cboBuscarLibro").val("").trigger("change");
+      toastr.warning("", "El libro ya fue agregado");
+      return false;
+    }
+
+    Swal.fire({
+      imageUrl: data.urlImagen,
+      title: data.titulo,
+      text: data.text,
+      imageWidth: 80,
+      imageHeight: 120,
+      html: `
+        <input id="input-Cantidad" class="swal2-input" placeholder="Ingrese Cantidad">
+        <input id="input-Precio" class="swal2-input" placeholder="Ingrese Precio">`,
+      showCancelButton: true,
+      focusConfirm: false,
+      preConfirm: () => {
+        let cantidad = document.getElementById("input-Cantidad").value;
+        let precio = document.getElementById("input-Precio").value;
+        if (!cantidad || !precio) {
+          Swal.showValidationMessage(
+            "Ambos campos, cantidad y precio, son requeridos"
+          );
+          return false;
+        }
+        if (isNaN(parseInt(cantidad)) || isNaN(parseFloat(precio))) {
+          Swal.showValidationMessage(
+            "Ambos campos, cantidad y precio, deben ser numéricos"
+          );
+          return false;
+        }
+        return { cantidad: cantidad, precio: precio };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let libro = {
+          idLibro: data.id,
+          autor: data.text,
+          tituloLibro: data.titulo,
+          editorialLibro: data.editorial,
+          generoLibro: data.genero,
+          cantidad: parseInt(result.value.cantidad),
+          precio: parseFloat(result.value.precio),
+          total: (
+            parseFloat(result.value.cantidad) * parseFloat(result.value.precio)
+          ).toFixed(2),
+        };
+        librosParaPedido.push(libro);
+        mostrarLibro_precios();
+      }
+    });
+  });
+  function mostrarLibro_precios() {
+    let total = 0;
+    $("#tbLibro tbody").html("");
+    librosParaPedido.forEach((item) => {
+      total += parseFloat(item.total);
+      $("#tbLibro tbody").append(
+        $("<tr>").append(
+          $("<td>").append(
+            $("<button>")
+              .addClass("btn btn-danger btn-eliminar btn-sm")
+              .append($("<i>").addClass("fa fa-trash-alt"))
+              .data("idLibro", item.idLibro)
+          ),
+          $("<td>").text(item.tituloLibro),
+          $("<td>").text(item.cantidad),
+          $("<td>").text(item.precio),
+          $("<td>").text(item.total)
+        )
+      );
+    });
+    $("#txtTotal").val(total.toFixed(2));
+  }
+  $(document).on("click", "button.btn-eliminar", function () {
+    const _idlibro = $(this).data("idLibro");
+    librosParaPedido = librosParaPedido.filter((l) => l.idLibro != _idlibro);
+    mostrarLibro_precios();
+  });
 });
