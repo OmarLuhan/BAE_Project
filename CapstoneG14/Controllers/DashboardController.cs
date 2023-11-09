@@ -24,7 +24,7 @@ namespace CapstoneG14.Controllers
         [HttpGet("ObtenerResumen")]
         public async Task<IActionResult> ObtenerResumen()
         {
-            GenericResponse<VMDashboard> gResponse = new GenericResponse<VMDashboard>();
+            GenericResponse<VMDashboard> gResponse = new();
 
             try
             {
