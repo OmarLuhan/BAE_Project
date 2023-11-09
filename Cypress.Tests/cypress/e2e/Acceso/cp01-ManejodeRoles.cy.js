@@ -21,7 +21,7 @@ describe('CP01 - Manejo de Roles', () => {
         cy.get("#txtRol").should("have.value", "Administrador")
     });
    it('CP01-02 - Ingresar con usuario supervisor', () => {
-    cy.get("#Correo").type("vapsukedre@gufum.com")
+    cy.get("#Correo").type("koltelardi@gufum.com")
     cy.get("#Clave").type("123")
     cy.get(".btn").click()
     cy.get(".display-4").should("have.text", "Bienvenido a BAE")
@@ -48,7 +48,7 @@ describe('CP01 - Manejo de Roles', () => {
     cy.get("#txtRol").should("have.value", "Supervisor")
      });
 it('CP01-03 - Ingresar con usuario empleado', () => {
-    cy.get("#Correo").type("jorzopomlo@gufum.com")
+    cy.get("#Correo").type("tilmagayde@gufum.com")
     cy.get("#Clave").type("123")
     cy.get(".btn").click()
     cy.get(".display-4").should("have.text", "Bienvenido a BAE")
