@@ -14,7 +14,7 @@ namespace CapstoneG14.Repositories.Implementations
 
         public async Task<Ventum> Registrar(Ventum ventum)
         {
-            Ventum ventaGenerada = new Ventum();
+            Ventum ventaGenerada = new();
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try

@@ -132,6 +132,7 @@ go
 create table Pedido(
 idPedido int primary key identity(1,1),
 numeroPedido varchar(6),
+idTipoDocumentoPedido int references TipoDocumentoVenta(idTipoDocumentoVenta),
 idUsuario int references Usuario(idUsuario),
 idTienda int references Tienda (idTienda),
 subTotal decimal(10,2),
