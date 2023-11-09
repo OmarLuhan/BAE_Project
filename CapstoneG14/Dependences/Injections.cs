@@ -32,6 +32,7 @@ namespace CapstoneG14.Dependences
             service.AddScoped<IVentaService, VentaService>();
             service.AddScoped<ITipoDocumentoVentaService, TipoDocumentoVentaService>();
             service.AddScoped<IDashBoardService, DashBoardService>();
+            service.AddScoped<ITiendaService, TiendaService>();
         }
     }
 

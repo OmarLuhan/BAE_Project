@@ -1,5 +1,5 @@
 const MODELO_BASE = {
-    idGenero: 0,
+    idTienda: 0,
     descripcion: "",
     esActivo: 1,
 }
@@ -9,12 +9,12 @@ $(document).ready(function () {
     tablaData = $('#tbdata').DataTable({
         responsive: true,
         "ajax": {
-            "url": '/Genero/Lista',
+            "url": '/Tienda/Lista',
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            { "data": "idGenero", "visible": false, "searchable": false },
+            { "data": "idTienda", "visible": false, "searchable": false },
             { "data": "descripcion" },
             {
                 "data": "esActivo", render: function (data) {
@@ -40,7 +40,7 @@ $(document).ready(function () {
                 text: 'Exportar Excel',
                 extend: 'excelHtml5',
                 title: '',
-                filename: 'Reporte Generos',
+                filename: 'Reporte Tiendas',
                 exportOptions: {
                     columns: [1,2]
                 }
@@ -52,7 +52,7 @@ $(document).ready(function () {
     });
 });
 function mostrarModal(modelo = MODELO_BASE) {
-    $("#txtId").val(modelo.idGenero)
+    $("#txtId").val(modelo.idTienda)
     $("#txtDescripcion").val(modelo.descripcion)
     $("#cboEstado").val(modelo.esActivo)
     $("#modalData").modal("show")
@@ -67,14 +67,14 @@ $("#btnGuardar").click(function () {
         return;
     }
     const modelo = structuredClone(MODELO_BASE);
-    modelo["idGenero"] = parseInt($("#txtId").val());
+    modelo["idTienda"] = parseInt($("#txtId").val());
     modelo["descripcion"] = $("#txtDescripcion").val();
     modelo["esActivo"] = $("#cboEstado").val();
 
     $("#modalData").find("div.modal-content").LoadingOverlay("show");
 
-    if (modelo.idGenero == 0) {
-        fetch("/Genero/Crear", {
+    if (modelo.idTienda == 0) {
+        fetch("/Tienda/Crear", {
             method: "POST",
             headers: {"Content-Type":"application/json;charset=utf-8"},
             body: JSON.stringify(modelo)
@@ -85,13 +85,13 @@ $("#btnGuardar").click(function () {
             if (responseJson.estado) {
                 tablaData.row.add(responseJson.objeto).draw(false);
                 $("#modalData").modal("hide");
-                swal("Listo!", "Genero creado", "success");
+                swal("Listo!", "Tienda creada", "success");
             } else {
-                swal("Error!", responseJson.mensaje, "error");
+                swal("Error!", responseJson.mensaje, "ocurrio un error intentelo nuevamente");
             }
         });
     } else {
-        fetch("/Genero/Editar", {
+        fetch("/Tienda/Editar", {
             method: "PUT",
            headers: {"Content-Type":"application/json;charset=utf-8"},
             body: JSON.stringify(modelo)
@@ -103,9 +103,9 @@ $("#btnGuardar").click(function () {
                 tablaData.row(filaSeleccionada).data(responseJson.objeto).draw(false);
                 filaSeleccionada = null;
                 $("#modalData").modal("hide");
-                swal("Listo!", "El Genero ha sido modificado", "success");
+                swal("Listo!", "La Tienda ha sido modificada", "success");
             } else {
-                swal("error!", responseJson.mensaje, "error");
+                swal("Error!", responseJson.mensaje, "ocurrio un error intentelo nuevamente");
             }
         });
 
@@ -131,7 +131,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
     const data = tablaData.row(fila).data();
     swal({
         title: "Esta seguro?",
-        text: `Eliminar Genero "${data.descripcion}"`,
+        text: `Eliminar Tienda "${data.descripcion}"`,
         type: "warning",
         showCancelButton: true,
         confirmButtonClass: "btn-danger",
@@ -143,7 +143,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
         function (respuesta) {
             if (respuesta) {
                 $(".showSweetAlert").LoadingOverlay("show");
-                fetch(`/Genero/Eliminar?idGenero=${data.idGenero}`, {
+                fetch(`/Tienda/Eliminar?idTienda=${data.idTienda}`, {
                     method: "DELETE"
                 }).then(response => {
                     $(".showSweetAlert").LoadingOverlay("hide");
@@ -151,9 +151,9 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
                 }).then(responseJson => {
                     if (responseJson.estado) {
                         tablaData.row(fila).remove().draw(false);
-                        swal("Listo!", "El genero fue eliminada", "success");
+                        swal("Listo!", "La tienda fue eliminada", "success");
                     } else {
-                        swal("error!", responseJson.mensaje, "error");
+                        swal("error!", responseJson.mensaje, "ocurrio un error intentelo nuevamente");
                     }
                 });
             }

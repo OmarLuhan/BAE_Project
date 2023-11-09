@@ -75,6 +75,18 @@ namespace CapstoneG14.Utilities.AutoMapper
        opt => opt.MapFrom(origen => origen.EsActivo == 1 ? true : false)
         );
       #endregion
+      #region TiendaE
+      CreateMap<Tiendum, VMTienda>()
+          .ForMember(dest =>
+          dest.EsActivo,
+          opt => opt.MapFrom(origen => origen.EsActivo == true ? 1 : 0)
+          );
+      CreateMap<VMTienda, Tiendum>()
+      .ForMember(dest =>
+       dest.EsActivo,
+       opt => opt.MapFrom(origen => origen.EsActivo == 1 ? true : false)
+        );
+      #endregion
       #region Libro
       CreateMap<Libro, VMLibro>()
         .ForMember(dest => dest.EsActivo,

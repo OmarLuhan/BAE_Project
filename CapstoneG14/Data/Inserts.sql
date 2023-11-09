@@ -104,6 +104,28 @@ INSERT INTO Editorial (descripcion, esActivo) VALUES ('Zondervan', 1);
 INSERT INTO Editorial (descripcion, esActivo) VALUES ('Abrams Books', 0);
 INSERT INTO Editorial (descripcion, esActivo) VALUES ('Baen Books', 1);
 INSERT INTO Editorial (descripcion, esActivo) VALUES ('Candlewick Press', 0);
+--_______________________________INSERTAR TIENDAS_____________________________
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Amazon', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('eBay', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Etsy', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('AliExpress', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Walmart', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Target Online', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Newegg', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Best Buy Online', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Shopify Stores', 1);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('MercadoLibre', 1);
+
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Zalando', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('ASOS', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Rakuten', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Flipkart', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Snapdeal', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Myntra', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('JD', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Taobao', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Tmall', 0);
+INSERT INTO Tienda (descripcion, esActivo) VALUES ('Wayfair', 0);
 
 --________________________________ INSERTAR G NEROS ________________________________
 insert into Libro
@@ -181,7 +203,8 @@ insert into Menu(descripcion,idMenuPadre, controlador,paginaAccion,esActivo) val
 --*menu hijos - Pedidos
 insert into Menu(descripcion,idMenuPadre, controlador,paginaAccion,esActivo) values
 ('Nuevo Pedido',4,'Pedido','NuevoPedido',1),
-('Historial Pedido',4,'Pedido','HistorialPedido',1)
+('Historial Pedido',4,'Pedido','HistorialPedido',1),
+('Tiendas E',4,'Tienda','Index',1)
 
 --*menu hijos - Ventas
 insert into Menu(descripcion,idMenuPadre, controlador,paginaAccion,esActivo) values
@@ -212,14 +235,16 @@ INSERT INTO RolMenu(idRol,idMenu,esActivo) values
 (1,13,1),
 (1,14,1),
 (1,15,1),
-(1,16,1)
+(1,16,1),
+(1,17,1)
 
 --*Empleado
 INSERT INTO RolMenu(idRol,idMenu,esActivo) values
 (2,12,1),
 (2,13,1),
 (2,14,1),
-(2,15,1)
+(2,15,1),
+(2,16,1)
 
 
 --*Supervisor
@@ -230,4 +255,5 @@ INSERT INTO RolMenu(idRol,idMenu,esActivo) values
 (3,12,1),
 (3,13,1),
 (3,14,1),
-(3,15,1)
+(3,15,1),
+(3,16,1)

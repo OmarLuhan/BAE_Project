@@ -11,9 +11,7 @@ public partial class Pedido
 
     public int? IdUsuario { get; set; }
 
-    public string? DocumentoCliente { get; set; }
-
-    public string? NombreCliente { get; set; }
+    public int? IdTienda { get; set; }
 
     public decimal? SubTotal { get; set; }
 
@@ -21,9 +19,13 @@ public partial class Pedido
 
     public decimal? Total { get; set; }
 
+    public bool? Estado { get; set; }
+
     public DateTime? FechaRegistro { get; set; }
 
     public virtual ICollection<DetallePedido> DetallePedidos { get; set; } = new List<DetallePedido>();
+
+    public virtual Tiendum? IdTiendaNavigation { get; set; }
 
     public virtual Usuario? IdUsuarioNavigation { get; set; }
 }

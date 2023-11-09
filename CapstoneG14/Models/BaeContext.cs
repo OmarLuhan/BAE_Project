@@ -39,16 +39,13 @@ public partial class BaeContext : DbContext
 
     public virtual DbSet<RolMenu> RolMenus { get; set; }
 
+    public virtual DbSet<Tiendum> Tienda { get; set; }
+
     public virtual DbSet<TipoDocumentoVentum> TipoDocumentoVenta { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     public virtual DbSet<Ventum> Venta { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Database=BAE;TrustServerCertificate=true;Trusted_Connection=true;MultipleActiveResultSets=true;");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Configuracion>(entity =>
@@ -73,7 +70,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<DetallePedido>(entity =>
         {
-            entity.HasKey(e => e.IdDetallePedido).HasName("PK__DetalleP__610F0056E2F11041");
+            entity.HasKey(e => e.IdDetallePedido).HasName("PK__DetalleP__610F005691183FEE");
 
             entity.ToTable("DetallePedido");
 
@@ -102,12 +99,12 @@ public partial class BaeContext : DbContext
 
             entity.HasOne(d => d.IdPedidoNavigation).WithMany(p => p.DetallePedidos)
                 .HasForeignKey(d => d.IdPedido)
-                .HasConstraintName("FK__DetallePe__idPed__619B8048");
+                .HasConstraintName("FK__DetallePe__idPed__68487DD7");
         });
 
         modelBuilder.Entity<DetalleVentum>(entity =>
         {
-            entity.HasKey(e => e.IdDetalleVenta).HasName("PK__DetalleV__BFE2843FCE7BFFE6");
+            entity.HasKey(e => e.IdDetalleVenta).HasName("PK__DetalleV__BFE2843F341BE167");
 
             entity.Property(e => e.IdDetalleVenta).HasColumnName("idDetalleVenta");
             entity.Property(e => e.Cantidad).HasColumnName("cantidad");
@@ -134,12 +131,12 @@ public partial class BaeContext : DbContext
 
             entity.HasOne(d => d.IdVentaNavigation).WithMany(p => p.DetalleVenta)
                 .HasForeignKey(d => d.IdVenta)
-                .HasConstraintName("FK__DetalleVe__idVen__5AEE82B9");
+                .HasConstraintName("FK__DetalleVe__idVen__47DBAE45");
         });
 
         modelBuilder.Entity<Editorial>(entity =>
         {
-            entity.HasKey(e => e.IdEditorial).HasName("PK__Editoria__9DF182DBBF4597A6");
+            entity.HasKey(e => e.IdEditorial).HasName("PK__Editoria__9DF182DB573EBA7B");
 
             entity.ToTable("Editorial");
 
@@ -157,7 +154,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Genero>(entity =>
         {
-            entity.HasKey(e => e.IdGenero).HasName("PK__Genero__85223DA357A0609A");
+            entity.HasKey(e => e.IdGenero).HasName("PK__Genero__85223DA32D806940");
 
             entity.ToTable("Genero");
 
@@ -175,7 +172,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Libro>(entity =>
         {
-            entity.HasKey(e => e.IdLibro).HasName("PK__Libro__5BC0F0266AFD9F65");
+            entity.HasKey(e => e.IdLibro).HasName("PK__Libro__5BC0F02695F6BA32");
 
             entity.ToTable("Libro");
 
@@ -215,16 +212,16 @@ public partial class BaeContext : DbContext
 
             entity.HasOne(d => d.IdEditorialNavigation).WithMany(p => p.Libros)
                 .HasForeignKey(d => d.IdEditorial)
-                .HasConstraintName("FK__Libro__idEditori__4D94879B");
+                .HasConstraintName("FK__Libro__idEditori__3A81B327");
 
             entity.HasOne(d => d.IdGeneroNavigation).WithMany(p => p.Libros)
                 .HasForeignKey(d => d.IdGenero)
-                .HasConstraintName("FK__Libro__idGenero__4CA06362");
+                .HasConstraintName("FK__Libro__idGenero__398D8EEE");
         });
 
         modelBuilder.Entity<Menu>(entity =>
         {
-            entity.HasKey(e => e.IdMenu).HasName("PK__Menu__C26AF4835C6C089B");
+            entity.HasKey(e => e.IdMenu).HasName("PK__Menu__C26AF483B5B186A8");
 
             entity.ToTable("Menu");
 
@@ -254,12 +251,12 @@ public partial class BaeContext : DbContext
 
             entity.HasOne(d => d.IdMenuPadreNavigation).WithMany(p => p.InverseIdMenuPadreNavigation)
                 .HasForeignKey(d => d.IdMenuPadre)
-                .HasConstraintName("FK__Menu__idMenuPadr__37A5467C");
+                .HasConstraintName("FK__Menu__idMenuPadr__24927208");
         });
 
         modelBuilder.Entity<Negocio>(entity =>
         {
-            entity.HasKey(e => e.IdNegocio).HasName("PK__Negocio__70E1E107ECCDBA7A");
+            entity.HasKey(e => e.IdNegocio).HasName("PK__Negocio__70E1E10793E66712");
 
             entity.ToTable("Negocio");
 
@@ -305,7 +302,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<NumeroCorrelativo>(entity =>
         {
-            entity.HasKey(e => e.IdNumeroCorrelativo).HasName("PK__NumeroCo__25FB547E2BAEA002");
+            entity.HasKey(e => e.IdNumeroCorrelativo).HasName("PK__NumeroCo__25FB547EC5CA77B8");
 
             entity.ToTable("NumeroCorrelativo");
 
@@ -323,27 +320,21 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Pedido>(entity =>
         {
-            entity.HasKey(e => e.IdPedido).HasName("PK__Pedido__A9F619B74979C705");
+            entity.HasKey(e => e.IdPedido).HasName("PK__Pedido__A9F619B7594C436C");
 
             entity.ToTable("Pedido");
 
             entity.Property(e => e.IdPedido).HasColumnName("idPedido");
-            entity.Property(e => e.DocumentoCliente)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("documentoCliente");
+            entity.Property(e => e.Estado).HasColumnName("estado");
             entity.Property(e => e.FechaRegistro)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("fechaRegistro");
+            entity.Property(e => e.IdTienda).HasColumnName("idTienda");
             entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
             entity.Property(e => e.ImpuestoTotal)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("impuestoTotal");
-            entity.Property(e => e.NombreCliente)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .HasColumnName("nombreCliente");
             entity.Property(e => e.NumeroPedido)
                 .HasMaxLength(6)
                 .IsUnicode(false)
@@ -353,14 +344,18 @@ public partial class BaeContext : DbContext
                 .HasColumnName("subTotal");
             entity.Property(e => e.Total).HasColumnType("decimal(10, 2)");
 
+            entity.HasOne(d => d.IdTiendaNavigation).WithMany(p => p.Pedidos)
+                .HasForeignKey(d => d.IdTienda)
+                .HasConstraintName("FK__Pedido__idTienda__6477ECF3");
+
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.IdUsuario)
-                .HasConstraintName("FK__Pedido__idUsuari__5DCAEF64");
+                .HasConstraintName("FK__Pedido__idUsuari__6383C8BA");
         });
 
         modelBuilder.Entity<Rol>(entity =>
         {
-            entity.HasKey(e => e.IdRol).HasName("PK__Rol__3C872F76D343B292");
+            entity.HasKey(e => e.IdRol).HasName("PK__Rol__3C872F76A6B2C63C");
 
             entity.ToTable("Rol");
 
@@ -378,7 +373,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<RolMenu>(entity =>
         {
-            entity.HasKey(e => e.IdRolMenu).HasName("PK__RolMenu__CD2045D81EA1C011");
+            entity.HasKey(e => e.IdRolMenu).HasName("PK__RolMenu__CD2045D8CD540336");
 
             entity.ToTable("RolMenu");
 
@@ -393,16 +388,32 @@ public partial class BaeContext : DbContext
 
             entity.HasOne(d => d.IdMenuNavigation).WithMany(p => p.RolMenus)
                 .HasForeignKey(d => d.IdMenu)
-                .HasConstraintName("FK__RolMenu__idMenu__3F466844");
+                .HasConstraintName("FK__RolMenu__idMenu__2C3393D0");
 
             entity.HasOne(d => d.IdRolNavigation).WithMany(p => p.RolMenus)
                 .HasForeignKey(d => d.IdRol)
-                .HasConstraintName("FK__RolMenu__idRol__3E52440B");
+                .HasConstraintName("FK__RolMenu__idRol__2B3F6F97");
+        });
+
+        modelBuilder.Entity<Tiendum>(entity =>
+        {
+            entity.HasKey(e => e.IdTienda).HasName("PK__Tienda__CF09B22C8AB68A8C");
+
+            entity.Property(e => e.IdTienda).HasColumnName("idTienda");
+            entity.Property(e => e.Descripcion)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("descripcion");
+            entity.Property(e => e.EsActivo).HasColumnName("esActivo");
+            entity.Property(e => e.FechaRegistro)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("fechaRegistro");
         });
 
         modelBuilder.Entity<TipoDocumentoVentum>(entity =>
         {
-            entity.HasKey(e => e.IdTipoDocumentoVenta).HasName("PK__TipoDocu__A9D59AEE78FF77F9");
+            entity.HasKey(e => e.IdTipoDocumentoVenta).HasName("PK__TipoDocu__A9D59AEEA818F4B3");
 
             entity.Property(e => e.IdTipoDocumentoVenta).HasColumnName("idTipoDocumentoVenta");
             entity.Property(e => e.Descripcion)
@@ -418,7 +429,7 @@ public partial class BaeContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__645723A6AB15E3EE");
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__645723A69CCF7685");
 
             entity.ToTable("Usuario");
 
@@ -456,16 +467,16 @@ public partial class BaeContext : DbContext
 
             entity.HasOne(d => d.IdRolNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdRol)
-                .HasConstraintName("FK__Usuario__idRol__4316F928");
+                .HasConstraintName("FK__Usuario__idRol__300424B4");
         });
 
         modelBuilder.Entity<Ventum>(entity =>
         {
-            entity.HasKey(e => e.IdVenta).HasName("PK__Venta__077D5614B8511E72");
+            entity.HasKey(e => e.IdVenta).HasName("PK__Venta__077D56149FC7887D");
 
             entity.Property(e => e.IdVenta).HasColumnName("idVenta");
             entity.Property(e => e.DocumentoCliente)
-                .HasMaxLength(10)
+                .HasMaxLength(11)
                 .IsUnicode(false)
                 .HasColumnName("documentoCliente");
             entity.Property(e => e.FechaRegistro)
@@ -492,11 +503,11 @@ public partial class BaeContext : DbContext
 
             entity.HasOne(d => d.IdTipoDocumentoVentaNavigation).WithMany(p => p.Venta)
                 .HasForeignKey(d => d.IdTipoDocumentoVenta)
-                .HasConstraintName("FK__Venta__idTipoDoc__5629CD9C");
+                .HasConstraintName("FK__Venta__idTipoDoc__4316F928");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Venta)
                 .HasForeignKey(d => d.IdUsuario)
-                .HasConstraintName("FK__Venta__idUsuario__571DF1D5");
+                .HasConstraintName("FK__Venta__idUsuario__440B1D61");
         });
 
         OnModelCreatingPartial(modelBuilder);

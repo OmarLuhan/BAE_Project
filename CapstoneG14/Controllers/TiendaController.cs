@@ -1,3 +1,4 @@
+
 using AutoMapper;
 using CapstoneG14.Models;
 using CapstoneG14.Models.ViewModels;
@@ -7,23 +8,24 @@ using CapstoneG14.Utilities.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace CapstoneG14.Controllers
 {
     [Authorize]
     [Route("[controller]")]
-    public class GeneroController : Controller
+    public class TiendaController : Controller
     {
-        private readonly ILogger<GeneroController> _logger;
+        private readonly ILogger<TiendaController> _logger;
         private readonly IMapper _mapper;
-        private readonly IGeneroService _generoService;
-
-        public GeneroController(ILogger<GeneroController> logger, IMapper mapper, IGeneroService generoService)
+        private readonly ITiendaService _tiendaService;
+        public TiendaController(ILogger<TiendaController> logger, IMapper mapper, ITiendaService tiendaService)
         {
             _logger = logger;
             _mapper = mapper;
-            _generoService = generoService;
+            _tiendaService = tiendaService;
         }
-        [ClaimRequirement("Genero", "Index")]
+
+        [ClaimRequirement("Tienda", "Index")]
         [HttpGet("Index")]
         public IActionResult Index()
         {
@@ -32,18 +34,18 @@ namespace CapstoneG14.Controllers
         [HttpGet("Lista")]
         public async Task<IActionResult> Lista()
         {
-            List<VMGenero> vmGenero = _mapper.Map<List<VMGenero>>(await _generoService.Lista());
-            _logger.LogInformation("Listando tipos de productos");
-            return StatusCode(StatusCodes.Status200OK, new { data = vmGenero });
+            List<VMTienda> vmTienda = _mapper.Map<List<VMTienda>>(await _tiendaService.Lista());
+            _logger.LogInformation("Listando tiendas");
+            return StatusCode(StatusCodes.Status200OK, new { data = vmTienda });
         }
         [HttpPost("Crear")]
-        public async Task<IActionResult> Crear([FromBody] VMGenero modelo)
+        public async Task<IActionResult> Crear([FromBody] VMTienda modelo)
         {
-            GenericResponse<VMGenero> gResponse = new GenericResponse<VMGenero>();
+            GenericResponse<VMTienda> gResponse = new();
             try
             {
-                Genero genero_creado = await _generoService.Crear(_mapper.Map<Genero>(modelo));
-                modelo = _mapper.Map<VMGenero>(genero_creado);
+                Tiendum tienda_creada = await _tiendaService.Crear(_mapper.Map<Tiendum>(modelo));
+                modelo = _mapper.Map<VMTienda>(tienda_creada);
                 gResponse.Estado = true;
                 gResponse.Objeto = modelo;
             }
@@ -55,13 +57,13 @@ namespace CapstoneG14.Controllers
             return StatusCode(StatusCodes.Status200OK, gResponse);
         }
         [HttpPut("Editar")]
-        public async Task<IActionResult> Editar([FromBody] VMGenero modelo)
+        public async Task<IActionResult> Editar([FromBody] VMTienda modelo)
         {
-            GenericResponse<VMGenero> gResponse = new();
+            GenericResponse<VMTienda> gResponse = new();
             try
             {
-                Genero genero_editado = await _generoService.Editar(_mapper.Map<Genero>(modelo));
-                modelo = _mapper.Map<VMGenero>(genero_editado);
+                Tiendum tienda_editada = await _tiendaService.Editar(_mapper.Map<Tiendum>(modelo));
+                modelo = _mapper.Map<VMTienda>(tienda_editada);
                 gResponse.Estado = true;
                 gResponse.Objeto = modelo;
             }
@@ -73,12 +75,12 @@ namespace CapstoneG14.Controllers
             return StatusCode(StatusCodes.Status200OK, gResponse);
         }
         [HttpDelete("Eliminar")]
-        public async Task<IActionResult> Eliminar(int idGenero)
+        public async Task<IActionResult> Eiminar(int idTienda)
         {
-            GenericResponse<string> gResponse = new();
+            GenericResponse<VMTienda> gResponse = new();
             try
             {
-                gResponse.Estado = await _generoService.Eliminar(idGenero);
+                gResponse.Estado = await _tiendaService.Eliminar(idTienda);
             }
             catch (Exception ex)
             {
