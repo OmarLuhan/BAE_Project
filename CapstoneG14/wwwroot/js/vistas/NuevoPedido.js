@@ -60,18 +60,18 @@ $(document).ready(function () {
     if (data.loading) return data.text;
     var contenedor = $(
       `
-          <table width="100%">
-           <tr>
-               <td style="width:60px">
-                   <img style="height:60px;width:60px;margin-right:10px" src="${data.urlImagen}"/>
-              </td>
-              <td>
-                   <p style="font-weight:bolder;margin:2px"> ${data.titulo}</p>
-                   <p style="margin:2px">${data.text}</p>
-              </td>
-          </tr>
-          </table>
-          `
+            <table width="100%">
+             <tr>
+                 <td style="width:60px">
+                     <img style="height:60px;width:60px;margin-right:10px" src="${data.urlImagen}"/>
+                </td>
+                <td>
+                     <p style="font-weight:bolder;margin:2px"> ${data.titulo}</p>
+                     <p style="margin:2px">${data.text}</p>
+                </td>
+            </tr>
+            </table>
+            `
     );
     return contenedor;
   }
@@ -95,15 +95,15 @@ $(document).ready(function () {
       imageWidth: 80,
       imageHeight: 120,
       html: `
-        <div class="form-group col-sm-12">
-        <div class="form-group">
-        <input id="input-Cantidad" class="form-control col-sm-12" placeholder="Cantidad">
-        </div>
-        <div class="form-group">
-        <input id="input-Precio" class="form-control col-sm-12" placeholder="Precio">
-        </div>
-        </div>
-        `,
+          <div class="form-group col-sm-12">
+          <div class="form-group">
+          <input id="input-Cantidad" class="form-control col-sm-12" placeholder="Cantidad">
+          </div>
+          <div class="form-group">
+          <input id="input-Precio" class="form-control col-sm-12" placeholder="Precio">
+          </div>
+          </div>
+          `,
       showCancelButton: true,
       focusConfirm: false,
       preConfirm: () => {
@@ -132,10 +132,12 @@ $(document).ready(function () {
           editorialLibro: data.editorial,
           generoLibro: data.genero,
           cantidad: parseInt(result.value.cantidad),
-          precio: parseFloat(result.value.precio),
+          precio: result.value.precio.toString(),
           total: (
             parseFloat(result.value.cantidad) * parseFloat(result.value.precio)
-          ).toFixed(2),
+          )
+            .toFixed(2)
+            .toString(),
         };
         librosParaPedido.push(libro);
         mostrarLibro_precios();
@@ -186,9 +188,9 @@ $(document).ready(function () {
     }
     const vmDetallePedido = librosParaPedido;
     const modelo = {
-      idTipoDocumentoPedido: $("#cboTipoDocumento").val(),
-      idTienda: $("#cboTienda").val(),
-      estado: $("#cboEstado").val(),
+      idTipoDocumentoPedido: parseInt($("#cboTipoDocumento").val()),
+      idTienda: parseInt($("#cboTienda").val()),
+      estado: parseInt($("#cboEstado").val()),
       total: $("#txtTotal").val(),
       DetallePedido: vmDetallePedido,
     };
@@ -198,7 +200,7 @@ $(document).ready(function () {
     fetch("/Pedido/RegistrarPedido", {
       method: "POST",
       headers: { "Content-Type": "application/json;charset=utf-8" },
-      body: JSON.stringify(modelo),
+      body: JSON.stringify(modelo), // Convertir el objeto a una cadena JSON antes de enviarlo
     })
       .then((response) => {
         $("#btnTerminarPedido").LoadingOverlay("hide");

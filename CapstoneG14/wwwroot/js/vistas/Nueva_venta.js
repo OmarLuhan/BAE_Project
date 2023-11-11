@@ -152,7 +152,7 @@ $(document).ready(function () {
           generoLibro: data.genero,
           cantidad: parseInt(valor),
           precio: data.precio.toString(),
-          total: (parseFloat(valor) * data.precio).toString(),
+          total: (parseFloat(valor) * data.precio).toFixed(2).toString(),
         };
         librosParaVenta.push(libro);
         mostrarLibro_precios();
