@@ -19,7 +19,7 @@ $(document).ready(function () {
     .then((responseJson) => {
       if (responseJson.length > 0) {
         responseJson.forEach((item) => {
-          $("#cboTipoDocumentoVenta").append(
+          $("#cboTipoDocumento").append(
             $("<option>").val(item.idTipoDocumentoVenta).text(item.descripcion)
           );
         });
@@ -95,8 +95,15 @@ $(document).ready(function () {
       imageWidth: 80,
       imageHeight: 120,
       html: `
-        <input id="input-Cantidad" class="swal2-input" placeholder="Ingrese Cantidad">
-        <input id="input-Precio" class="swal2-input" placeholder="Ingrese Precio">`,
+        <div class="form-group col-sm-12">
+        <div class="form-group">
+        <input id="input-Cantidad" class="form-control col-sm-12" placeholder="Cantidad">
+        </div>
+        <div class="form-group">
+        <input id="input-Precio" class="form-control col-sm-12" placeholder="Precio">
+        </div>
+        </div>
+        `,
       showCancelButton: true,
       focusConfirm: false,
       preConfirm: () => {
@@ -161,5 +168,60 @@ $(document).ready(function () {
     const _idlibro = $(this).data("idLibro");
     librosParaPedido = librosParaPedido.filter((l) => l.idLibro != _idlibro);
     mostrarLibro_precios();
+  });
+
+  $("#btnTerminarPedido").click(function () {
+    if ($("#cboTienda").val() == "0") {
+      toastr.warning("", "Debe seleccionar una Tienda");
+      $("#cboTienda").focus();
+      return;
+    }
+    if (librosParaPedido.length < 1) {
+      toastr.warning("", "debe ingresar productos");
+      return;
+    }
+    if ($("#txtFechaEntrega").val() == "") {
+      toastr.warning("", "debe ingresar una fecha de entrega");
+      return;
+    }
+    const vmDetallePedido = librosParaPedido;
+    const modelo = {
+      idTipoDocumentoPedido: $("#cboTipoDocumento").val(),
+      idTienda: $("#cboTienda").val(),
+      estado: $("#cboEstado").val(),
+      total: $("#txtTotal").val(),
+      DetallePedido: vmDetallePedido,
+    };
+    debugger;
+    $("#btnTerminarPedido").LoadingOverlay("show");
+    console.log(modelo);
+    fetch("/Pedido/RegistrarPedido", {
+      method: "POST",
+      headers: { "Content-Type": "application/json;charset=utf-8" },
+      body: JSON.stringify(modelo),
+    })
+      .then((response) => {
+        $("#btnTerminarPedido").LoadingOverlay("hide");
+        return response.ok ? response.json() : Promise.reject(response);
+      })
+      .then((responseJson) => {
+        if (responseJson.estado) {
+          librosParaPedido = [];
+          mostrarLibro_precios();
+          $("#cboTienda").val($("#cboTienda option:first").val());
+          $("#cboTipoDocumento").val($("#cboTipoDocumento option:first").val());
+          swal.fire(
+            "Registrado!",
+            `Numero Pedido: ${responseJson.objeto.numeroPedido}`,
+            "success"
+          );
+        } else {
+          swal.fire(
+            "Lo sentimos!",
+            "No se pudo registrar la el pedido intentelo nuevamente",
+            "error"
+          );
+        }
+      });
   });
 });

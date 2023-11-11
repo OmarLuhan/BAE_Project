@@ -13,5 +13,7 @@ public partial class TipoDocumentoVentum
 
     public DateTime? FechaRegistro { get; set; }
 
+    public virtual ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
+
     public virtual ICollection<Ventum> Venta { get; set; } = new List<Ventum>();
 }

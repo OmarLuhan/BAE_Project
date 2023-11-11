@@ -227,6 +227,62 @@ namespace CapstoneG14.Utilities.AutoMapper
             );
 
       #endregion
+      #region Pedido
+      CreateMap<Pedido, VMPedido>()
+          .ForMember(dest =>
+           dest.FechaRegistro,
+           opt => opt.MapFrom(origen => origen.FechaRegistro.Value.ToString("dd/MM/yyyy"))
+           )
+          .ForMember(dest =>
+           dest.FechaEntrega,
+           opt => opt.MapFrom(origen => origen.FechaEntrega.Value.ToString("dd/MM/yyyy"))
+           )
+          .ForMember(dest =>
+           dest.Estado,
+           opt => opt.MapFrom(origen => origen.Estado==true? 1: 0)
+           )
+          .ForMember(dest =>
+           dest.Tienda,
+           opt => opt.MapFrom(origen => origen.IdTiendaNavigation.Descripcion)
+           )
+          .ForMember(dest =>
+           dest.Usuario,
+           opt => opt.MapFrom(origen => origen.IdUsuarioNavigation.Nombre)
+           )
+           .ForMember(dest =>
+           dest.TipoDocumentoPedido,
+            opt => opt.MapFrom(origen => origen.IdTipoDocumentoPedidoNavigation.Descripcion)
+            )
+           .ForMember(dest =>
+          dest.Total,
+         opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Total, new CultureInfo("es-PE")))
+         );
+         CreateMap<VMPedido, Pedido>()
+         .ForMember(dest =>
+         dest.Total,
+        opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Total, new CultureInfo("es-PE")))
+         );
+      #endregion
+      #region DetallePedido
+      CreateMap<DetallePedido,VMDetallePedido>()
+       .ForMember(dest =>
+           dest.Precio,
+           opt => opt.MapFrom(origen => Convert.ToString(origen.Precio.Value, new CultureInfo("es-PE")))
+            )
+        .ForMember(dest =>
+           dest.Total,
+           opt => opt.MapFrom(origen => Convert.ToString(origen.Total.Value, new CultureInfo("es-PE")))
+         );
+      CreateMap<VMDetallePedido, DetallePedido>()
+      .ForMember(dest =>
+           dest.Precio,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Precio, new CultureInfo("es-PE")))
+            )
+        .ForMember(dest =>
+           dest.Total,
+           opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Total, new CultureInfo("es-PE")))
+         );
+      #endregion
     }
   }
 }

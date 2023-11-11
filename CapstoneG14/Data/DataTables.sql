@@ -135,11 +135,10 @@ numeroPedido varchar(6),
 idTipoDocumentoPedido int references TipoDocumentoVenta(idTipoDocumentoVenta),
 idUsuario int references Usuario(idUsuario),
 idTienda int references Tienda (idTienda),
-subTotal decimal(10,2),
-impuestoTotal decimal(10,2),
-Total decimal(10,2),
+Total decimal(10,2) not null,
 estado bit,
-fechaRegistro datetime default getdate()
+fechaRegistro datetime default getdate(),
+fechaEntrega datetime
 )
 go
 

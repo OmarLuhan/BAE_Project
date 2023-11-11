@@ -4,12 +4,12 @@
 }
 
 @section Styles {
-    <link href="~/vendor/select2/select2.min.css" rel="stylesheet">
-    <style>
+        <link href="~/vendor/select2/select2.min.css" rel="stylesheet">
+     <style>
         .select2 {
             width: 100% !important;
         }
-    </style>
+    </style> 
 }
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -84,28 +84,30 @@
                         <div class="card-body">
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="cboTipoDocumentoVenta">Tipo</label>
+                                    <label class="input-group-text" for="cboTipoDocumento">Tipo</label>
                                 </div>
-                                <select class="custom-select" id="cboTipoDocumentoVenta">
-
+                                <select class="custom-select" id="cboTipoDocumento">
                                 </select>
                             </div>
+                             
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
-                                    <span  class="input-group-text" id="inputGroupTotal">Total</span>
+                                    <label class="input-group-text" for="cboEstado">Estado</label>
                                 </div>
-                                <input type="text" class="form-control text-right" aria-label="Small"
-                                    aria-describedby="inputGroupTotal" id="txtTotal" disabled>
-                            </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text badge" for="cboEstado">Estado</label>
-                                </div>
-                                <select class="custom-select" id="cboEstados">
+                                <select disabled class="custom-select" id="cboEstado">
                                  <option value="0">Registrado</option>   
                                 <option value="1">Recibido</option>
                                 </select>
                             </div>
+
+                             <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span  class="input-group-text" id="inputGroupTotal">Total </span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small"
+                                    aria-describedby="inputGroupTotal" id="txtTotal" disabled>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -117,8 +119,8 @@
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="form-group mb-0">
-                                <button class="btn btn-success btn-sm btn-block" id="btnTerminarVenta">Terminar
-                                    Venta</button>
+                                <button class="btn btn-success btn-sm btn-block" id="btnTerminarPedido">Terminar
+                                    Pedido</button>
                             </div>
                         </div>
                     </div>
@@ -126,14 +128,10 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
-<!-- /.container-fluid -->
 @section Scripts {
     <script src="~/vendor/select2/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/vendor/select2/es.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/vistas/Nuevo_pedido.js"></script>
 }

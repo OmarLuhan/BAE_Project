@@ -1,8 +1,6 @@
-
 using CapstoneG14.Models;
 using CapstoneG14.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using static CapstoneG14.Repositories.Interfaces.IGenericRepository;
 
 namespace CapstoneG14.Repositories.Implementations
 {
@@ -13,23 +11,18 @@ namespace CapstoneG14.Repositories.Implementations
         {
             _context = context;
         }
-        public Task<Pedido> ActualizarEstado(int idPedido, bool estado)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public async Task<Pedido> Registrar(Pedido pedido)
         {
             Pedido pedidoGenerado=new();
             using(var transaction=_context.Database.BeginTransaction()){
                 try{
-                    if(pedido.Estado==true){
                         foreach(DetallePedido dp in pedido.DetallePedidos){
                         Libro libroEncontrado=await _context.Libros.Where(l=>l.IdLibro==dp.IdLibro).FirstAsync();
                         libroEncontrado.Pendiente+=dp.Cantidad;
                         _context.Libros.Update(libroEncontrado);
                         await _context.SaveChangesAsync();
-                    }
                     }
                     NumeroCorrelativo correlative=await _context.NumeroCorrelativos.Where(nc=>nc.Gestion=="Pedido").FirstAsync();
                     correlative.UltimoNumero+=1;
@@ -52,9 +45,19 @@ namespace CapstoneG14.Repositories.Implementations
             return pedidoGenerado;
         }
 
-        public Task<List<DetallePedido>> Reporte(DateTime fechaInicio, DateTime fechaFin)
+        public async Task<List<DetallePedido>> Reporte(DateTime fechaInicio, DateTime fechaFin)
         {
-           throw new NotImplementedException();
+           List<DetallePedido> reporte= await _context.DetallePedidos
+           .Include(p=>p.IdPedidoNavigation).ThenInclude(u=>u.IdUsuarioNavigation)
+           .Include(p=>p.IdPedidoNavigation).ThenInclude(tdp=>tdp.IdTipoDocumentoPedidoNavigation)
+           .Include(p=>p.IdPedidoNavigation).ThenInclude(t=>t.IdTiendaNavigation)
+           .Where(dp=>dp.IdPedidoNavigation.FechaRegistro.Value.Date>=fechaInicio.Date &&
+              dp.IdPedidoNavigation.FechaRegistro.Value.Date<=fechaFin.Date).ToListAsync();
+            return reporte;
+        }
+        public Task<Pedido> ActualizarEstado(int idPedido, bool estado)
+        {
+            throw new NotImplementedException();
         }
     }
 }
