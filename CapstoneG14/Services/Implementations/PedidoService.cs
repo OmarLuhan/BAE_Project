@@ -20,6 +20,7 @@ namespace CapstoneG14.Services.Implementations
             return query.Include(t=>t.IdTipoDocumentoPedidoNavigation)
             .Include(u=>u.IdUsuarioNavigation)
             .Include(t=>t.IdTiendaNavigation)
+            .Include(dp=>dp.DetallePedidos)
             .First();
         }
         public async Task<List<Pedido>> Historial(string numeroPedido, string fechaInicio, string fechaFin)

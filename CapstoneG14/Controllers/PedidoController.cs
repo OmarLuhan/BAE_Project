@@ -5,6 +5,7 @@ using CapstoneG14.Models.ViewModels;
 using CapstoneG14.Services.Interfaces;
 using CapstoneG14.Utilities.CustomFilter;
 using CapstoneG14.Utilities.Response;
+using DinkToPdf;
 using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,6 +72,28 @@ namespace CapstoneG14.Controllers
             List<VMPedido> vmHistorialPedido = _mapper.Map<List<VMPedido>>(await _pedidoService.Historial(numeroPedido, fechaInicio, fechaFin));
             return StatusCode(StatusCodes.Status200OK, vmHistorialPedido);
         }
+         [HttpGet("MostrarPdfPedido")]
+        public IActionResult MostrarPdfPedido(string numeroPedido)
+        {
+            string urlPlantillaVista = $"{Request.Scheme}://{this.Request.Host}/Plantilla/PdfPedido?numeroPedido={numeroPedido}";
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = new GlobalSettings()
+                {
+                    PaperSize = PaperKind.A4,
+                    Orientation = Orientation.Portrait
+                },
+                Objects ={
+                    new ObjectSettings()
+                    {
+                        Page= urlPlantillaVista
+                    }
+                }
+            };
+            var archivoPdf = _converter.Convert(pdf);
+            return File(archivoPdf, "application/pdf");
+        }
+
 
     }
 }

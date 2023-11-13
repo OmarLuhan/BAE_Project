@@ -14,11 +14,13 @@ namespace CapstoneG14.Controllers
         private readonly IMapper _mapper;
         private readonly INegocioService _negocioService;
         private readonly IVentaService _ventaService;
-        public PlantillaController(IMapper mapper, INegocioService negocioService, IVentaService ventaService)
+        private readonly IPedidoService _pedidoService;
+        public PlantillaController(IMapper mapper, INegocioService negocioService, IVentaService ventaService,IPedidoService pedidoService)
         {
             _mapper = mapper;
             _negocioService = negocioService;
             _ventaService = ventaService;
+            _pedidoService=pedidoService;
         }
         [HttpGet("EnviarClave")]
         public IActionResult EnviarClave(string correo, string clave)
@@ -42,6 +44,18 @@ namespace CapstoneG14.Controllers
             VMPDFVenta? modelo = new VMPDFVenta();
             modelo.Negocio = vmNegocio;
             modelo.Venta = vmVenta;
+            return View(modelo);
+        }
+         [HttpGet("PdfPedido")]
+        public async Task<IActionResult> PdfPedido(string numeroPedido)
+        {
+            VMPedido vmPedido = _mapper.Map<VMPedido>(await _pedidoService.Detalle(numeroPedido));
+            VMNegocio? vmNegocio = _mapper.Map<VMNegocio>(await _negocioService.Obtener());
+            VMPDFPedido? modelo = new()
+            {
+                Negocio = vmNegocio,
+                Pedido = vmPedido
+            };
             return View(modelo);
         }
 
