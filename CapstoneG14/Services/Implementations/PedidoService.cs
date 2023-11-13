@@ -36,6 +36,7 @@ namespace CapstoneG14.Services.Implementations
                 ).Include(t=>t.IdTipoDocumentoPedidoNavigation)
                 .Include(u=>u.IdUsuarioNavigation)
                 .Include(t=>t.IdTiendaNavigation)
+                .Include(dp=>dp.DetallePedidos)
                 .ToList();
             }
             else{

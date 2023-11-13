@@ -14,8 +14,8 @@ namespace CapstoneG14.Models.ViewModels
     public string? Tienda { get; set; }
     public string? Total { get; set; }
     public int ? Estado { get; set; }
-    public DateTime? FechaRegistro { get; set; }
-    public DateTime? FechaEntrega { get; set; }
+    public string? FechaRegistro { get; set; }
+    public string? FechaEntrega { get; set; }
 
     public virtual ICollection<VMDetallePedido> DetallePedidos { get; set; }
     }

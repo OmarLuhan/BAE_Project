@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Historia De Venta";
+    ViewData["Title"] = "Historia De Pedido";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,7 +12,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3 bg-second-primary">
-            <h6 class="m-0 font-weight-bold text-white">Historial de Venta</h6>
+            <h6 class="m-0 font-weight-bold text-white">Historial de Pedidos</h6>
         </div>
         <div class="card-body">
             <div class="form-row align-items-end">
@@ -31,9 +31,9 @@
                     <label for="txtFechaFin">Fecha Fin</label>
                     <input type="text" class="form-control form-control-sm" id="txtFechaFin">
                 </div>
-                <div class="form-group col-sm-3 busqueda-venta">
-                    <label for="txtNumeroVenta">Numero Venta</label>
-                    <input type="text" class="form-control form-control-sm" id="txtNumeroVenta">
+                <div class="form-group col-sm-3 busqueda-pedido">
+                    <label for="txtNumeroVenta">Numero Pedido</label>
+                    <input type="text" class="form-control form-control-sm" id="txtNumeroPedido">
                 </div>
                 <div class="form-group col-sm-3">
                     <button class="btn btn-success btn-block btn-sm" type="button" id="btnBuscar"><i
@@ -43,20 +43,20 @@
             <hr />
             <div class="row">
                 <div class="col-sm-12">
-                    <table class="table table-sm table-striped" id="tbventa">
+                    <table class="table table-sm table-striped" id="tbpedido">
                         <thead>
                             <tr>
                                 <th>Fecha Registro</th>
-                                <th>Numero Venta</th>
+                                <th>Fecha Entrega</th>
+                                <th>Numero Pedido</th>
                                 <th>Tipo Documento</th>
-                                <th>Documento Cliente</th>
-                                <th>Nombre Cliente</th>
+                                <th>Tienda</th>
+                                <th>Estado</th>
                                 <th>Total</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
                 </div>
@@ -70,7 +70,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6>Detalle Venta</h6>
+                    <h6>Detalle Pedido</h6>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -86,46 +86,45 @@
                                             disabled>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="txtNumVenta">Numero Venta</label>
-                                        <input type="text" class="form-control form-control-sm" id="txtNumVenta"
+                                        <label for="txtFechaRegistro">Fecha Entrega</label>
+                                        <input type="text" class="form-control form-control-sm" id="txtFechaEntrega"
                                             disabled>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="txtUsuarioRegistro">Usuario Registro</label>
-                                        <input type="text" class="form-control form-control-sm" id="txtUsuarioRegistro"
+                                        <label for="txtNumVenta">Numero Pedido</label>
+                                        <input type="text" class="form-control form-control-sm" id="txtNumPedido"
                                             disabled>
                                     </div>
                                 </div>
                                 <div class="form-row">
+                                     <div class="form-group col-sm-4">
+                                        <label for="txtUsuarioRegistro">Usuario Registro</label>
+                                        <input type="text" class="form-control form-control-sm" id="txtUsuarioRegistro"
+                                            disabled>
+                                    </div>
                                     <div class="form-group col-sm-4">
                                         <label for="txtTipoDocumento">Tipo Documento</label>
                                         <input type="text" class="form-control form-control-sm" id="txtTipoDocumento"
                                             disabled>
                                     </div>
                                     <div class="form-group col-sm-4">
-                                        <label for="txtDocumentoCliente">Documento Cliente</label>
-                                        <input type="text" class="form-control form-control-sm" id="txtDocumentoCliente"
-                                            disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="txtNombreCliente">Nombre Cliente</label>
-                                        <input type="text" class="form-control form-control-sm" id="txtNombreCliente"
+                                        <label for="txtNombreCliente">Tienda</label>
+                                        <input type="text" class="form-control form-control-sm" id="txtTienda"
                                             disabled>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-sm-4">
-                                        <label for="txtSubTotal">Sub Total</label>
-                                        <input type="text" class="form-control form-control-sm" id="txtSubTotal"
-                                            disabled>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="txtIGV">IGV</label>
-                                        <input type="text" class="form-control form-control-sm" id="txtIGV" disabled>
-                                    </div>
+                                    
                                     <div class="form-group col-sm-4">
                                         <label for="txtTotal">Total</label>
                                         <input type="text" class="form-control form-control-sm" id="txtTotal" disabled>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="txtTotal">Estado</label>
+                                         <select  class="form-control form-control-sm" id="cboEstado">
+                                            <option value="0">Registrado</option>   
+                                            <option value="1">Recibido</option>
+                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -149,8 +148,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-primary btn-sm" target="_blank" id="linkImprimir">Imprimir</a>
-                    <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-info btn-sm" type="button" id="guardarCambio">Guardar Cambio</button>
+                    <a href="#" class="btn btn-info btn-sm" target="_blank" id="linkImprimir">Imprimir</a>
+                    <button class="btn btn-warning btn-sm" type="button" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -163,5 +163,5 @@
 @section Scripts {
     <script src="~/vendor/jquery-ui/jquery-ui.js"></script>
     <script src="~/vendor/jquery-ui/idioma/datepicker-es.js"></script>
-    <script src="../js/vistas/historial_ventas.js"></script>
+    <script src="../js/vistas/historial_pedidos.js"></script>
 }

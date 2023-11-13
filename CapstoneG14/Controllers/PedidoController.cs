@@ -65,6 +65,12 @@ namespace CapstoneG14.Controllers
             }
             return StatusCode(StatusCodes.Status200OK, gResponse);
         }
+        [HttpGet("Historial")]
+        public async Task<IActionResult> Historial(string numeroPedido, string fechaInicio = "", string fechaFin = "")
+        {
+            List<VMPedido> vmHistorialPedido = _mapper.Map<List<VMPedido>>(await _pedidoService.Historial(numeroPedido, fechaInicio, fechaFin));
+            return StatusCode(StatusCodes.Status200OK, vmHistorialPedido);
+        }
 
     }
 }
