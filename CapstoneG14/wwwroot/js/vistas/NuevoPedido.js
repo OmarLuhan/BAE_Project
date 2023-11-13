@@ -192,7 +192,7 @@ $(document).ready(function () {
       idTienda: parseInt($("#cboTienda").val()),
       estado: parseInt($("#cboEstado").val()),
       total: $("#txtTotal").val(),
-      DetallePedido: vmDetallePedido,
+      DetallePedidos: vmDetallePedido,
     };
     debugger;
     $("#btnTerminarPedido").LoadingOverlay("show");

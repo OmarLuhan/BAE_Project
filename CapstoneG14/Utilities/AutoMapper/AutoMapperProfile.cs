@@ -261,7 +261,9 @@ namespace CapstoneG14.Utilities.AutoMapper
          .ForMember(dest =>
          dest.Total,
         opt => opt.MapFrom(origen => Convert.ToDecimal(origen.Total, new CultureInfo("es-PE")))
-         );
+         ).ForMember(dest =>dest.Estado,
+          opt => opt.MapFrom(origen => origen.Estado==1? true: false)
+          );
       #endregion
       #region DetallePedido
       CreateMap<DetallePedido,VMDetallePedido>()

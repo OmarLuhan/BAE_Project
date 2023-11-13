@@ -17,6 +17,6 @@ namespace CapstoneG14.Models.ViewModels
     public DateTime? FechaRegistro { get; set; }
     public DateTime? FechaEntrega { get; set; }
 
-    public virtual ICollection<VMDetallePedido> DetallePedido { get; set; }
+    public virtual ICollection<VMDetallePedido> DetallePedidos { get; set; }
     }
 }
