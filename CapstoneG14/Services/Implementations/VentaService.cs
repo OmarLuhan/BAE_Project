@@ -58,7 +58,7 @@ namespace CapstoneG14.Services.Implementations
         public async Task<List<Libro>> ObtenerLibros(string busqueda)
         {
             IQueryable<Libro> query = await _libroRepository.Consultar(
-                l => l.EsActivo == true && l.Pendiente > 0 && string.Concat(
+                l => l.EsActivo == true && l.Stock > 0 && string.Concat(
                 l.CodigoBarra, l.Titulo, l.Autor).Contains(busqueda)
                 );
             return query.Include(e => e.IdEditorialNavigation).Include(g => g.IdGeneroNavigation).ToList();

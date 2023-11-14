@@ -22,7 +22,7 @@ namespace CapstoneG14.Repositories.Implementations
                     foreach (DetalleVentum dv in ventum.DetalleVenta)
                     {
                         Libro libroEncontrado = _context.Libros.Where(l => l.IdLibro == dv.IdLibro).First();
-                        libroEncontrado.Pendiente -= dv.Cantidad;
+                        libroEncontrado.Stock -= dv.Cantidad;
                         _context.Libros.Update(libroEncontrado);
                         await _context.SaveChangesAsync();
                     }

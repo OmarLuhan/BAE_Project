@@ -6,7 +6,7 @@
   titulo: "",
   idEditorial: 0,
   idGenero: 0,
-  pendiente: 0,
+  stok: 0,
   urlImagen: "",
   precio: 0,
   esActivo: 1,
@@ -61,7 +61,7 @@ $(document).ready(function () {
       { data: "titulo" },
       { data: "nombreEditorial" },
       { data: "nombreGenero" },
-      { data: "pendiente" },
+      { data: "stock" },
       { data: "precio" },
       {
         data: "esActivo",
@@ -112,7 +112,7 @@ function mostrarModal(modelo = MODELO_BASE) {
   $("#cboGenero").val(
     modelo.idGenero == 0 ? $("#cboGenero option:First") : modelo.idGenero
   );
-  $("#txtPendiente").val(modelo.pendiente);
+  $("#txtStock").val(modelo.stock);
   $("#txtPrecio").val(modelo.precio);
   $("#cboEstado").val(modelo.esActivo);
   $("#txtImagen").val("");
@@ -134,9 +134,9 @@ $("#btnGuardar").click(function () {
     $("#txtIsbn").focus();
     return;
   }
-  if (isNaN($("#txtPendiente").val())) {
-    toastr.warning("", "El campo pendientes de entrega debe ser un numero");
-    $("#txtPendiente").focus();
+  if (isNaN($("#txtStock").val())) {
+    toastr.warning("", "El campo stock debe ser un numero");
+    $("#txtStock").focus();
     return;
   }
   if (isNaN($("#txtPrecio").val())) {
@@ -171,7 +171,7 @@ $("#btnGuardar").click(function () {
   modelo["titulo"] = $("#txtTitulo").val();
   modelo["idEditorial"] = $("#cboEditorial").val();
   modelo["idGenero"] = $("#cboGenero").val();
-  modelo["pendiente"] = parseInt($("#txtPendiente").val());
+  modelo["stock"] = parseInt($("#txtStock").val());
   modelo["precio"] = parseFloat($("#txtPrecio").val());
   modelo["esActivo"] = $("#cboEstado").val();
   const inputFoto = document.getElementById("txtImagen");

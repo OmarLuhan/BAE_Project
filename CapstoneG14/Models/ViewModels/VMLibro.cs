@@ -19,7 +19,7 @@ namespace CapstoneG14.Models.ViewModels
 
         public string? Titulo { get; set; }
 
-        public int? Pendiente { get; set; }
+        public int? Stock { get; set; }
 
         public string? UrlImagen { get; set; }
 

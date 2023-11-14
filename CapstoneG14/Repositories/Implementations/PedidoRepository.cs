@@ -20,7 +20,7 @@ namespace CapstoneG14.Repositories.Implementations
                 try{
                         foreach(DetallePedido dp in pedido.DetallePedidos){
                         Libro libroEncontrado=await _context.Libros.Where(l=>l.IdLibro==dp.IdLibro).FirstAsync();
-                        libroEncontrado.Pendiente+=dp.Cantidad;
+                        libroEncontrado.Stock+=dp.Cantidad;
                         _context.Libros.Update(libroEncontrado);
                         await _context.SaveChangesAsync();
                     }

@@ -47,6 +47,8 @@ public partial class BaeContext : DbContext
 
     public virtual DbSet<Ventum> Venta { get; set; }
 
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Configuracion>(entity =>
@@ -199,10 +201,10 @@ public partial class BaeContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("nombreImagen");
-            entity.Property(e => e.Pendiente).HasColumnName("pendiente");
             entity.Property(e => e.Precio)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("precio");
+            entity.Property(e => e.Stock).HasColumnName("stock");
             entity.Property(e => e.Titulo)
                 .HasMaxLength(100)
                 .IsUnicode(false);

@@ -134,7 +134,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
   swal(
     {
       title: "Esta seguro?",
-      text: `Eliminar Tipo "${data.descripcion}"`,
+      text: `Eliminar"${data.descripcion}"`,
       type: "warning",
       showCancelButton: true,
       confirmButtonClass: "btn-warning",

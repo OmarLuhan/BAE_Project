@@ -129,11 +129,11 @@ INSERT INTO Tienda (descripcion, esActivo) VALUES ('Wayfair', 0);
 
 --________________________________ INSERTAR G NEROS ________________________________
 insert into Libro
-(CodigoBarra, isbn, Titulo, precio, pendiente, Autor, idGenero, idEditorial, esActivo)
+(CodigoBarra, isbn, Titulo, precio, stock, Autor, idGenero, idEditorial, esActivo)
 values 
 ('9780451524935', '0451524934', '1984', 123.45, 0, 'George Orwell', 12, 27, 1)
 insert into Libro
-(CodigoBarra, isbn, Titulo, precio, pendiente, Autor, idGenero, idEditorial, esActivo)
+(CodigoBarra, isbn, Titulo, precio, stock, Autor, idGenero, idEditorial, esActivo)
 values 
 ('9780451524936', '0451524935', 'Brave New World', 89.90, 0, 'Aldous Huxley', 3, 15, 1),
 ('9780451524937', '0451524936', 'To Kill a Mockingbird', 67.50, 0, 'Harper Lee', 7, 21, 1),
