@@ -7,6 +7,6 @@ namespace CapstoneG14.Repositories.Interfaces
     {
         Task<Pedido> Registrar(Pedido pedido);
         Task<List<DetallePedido>> Reporte(DateTime fechaInicio, DateTime fechaFin);
-        Task<Pedido>ActualizarEstado(int idPedido, bool estado);
+        Task<Pedido>ActualizarEstado(Pedido pedido);
     }
 }

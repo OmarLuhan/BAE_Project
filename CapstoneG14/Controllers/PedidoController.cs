@@ -66,6 +66,24 @@ namespace CapstoneG14.Controllers
             }
             return StatusCode(StatusCodes.Status200OK, gResponse);
         }
+        [HttpPut("ActualizarEstado")]
+        public async Task<IActionResult> ActualizarEstado(string numeroPedido, bool estado){
+            GenericResponse<VMPedido> gResponse = new();
+            try
+            {
+                Pedido pedido_editado = await _pedidoService.ActualizarEstado(numeroPedido, estado);
+                VMPedido modelo = _mapper.Map<VMPedido>(pedido_editado);
+                gResponse.Estado = true;
+                gResponse.Objeto = modelo;
+            }
+            catch (Exception e)
+            {
+                gResponse.Estado = false;
+                gResponse.Mensaje = e.Message;
+                
+            }
+            return StatusCode(StatusCodes.Status200OK, gResponse);
+        }
         [HttpGet("Historial")]
         public async Task<IActionResult> Historial(string numeroPedido, string fechaInicio = "", string fechaFin = "")
         {

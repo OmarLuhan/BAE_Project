@@ -18,12 +18,6 @@ namespace CapstoneG14.Repositories.Implementations
             Pedido pedidoGenerado=new();
             using(var transaction=_context.Database.BeginTransaction()){
                 try{
-                        foreach(DetallePedido dp in pedido.DetallePedidos){
-                        Libro libroEncontrado=await _context.Libros.Where(l=>l.IdLibro==dp.IdLibro).FirstAsync();
-                        libroEncontrado.Stock+=dp.Cantidad;
-                        _context.Libros.Update(libroEncontrado);
-                        await _context.SaveChangesAsync();
-                    }
                     NumeroCorrelativo correlative=await _context.NumeroCorrelativos.Where(nc=>nc.Gestion=="Pedido").FirstAsync();
                     correlative.UltimoNumero+=1;
                     correlative.FechaActualizacion=DateTime.Now;
@@ -37,9 +31,9 @@ namespace CapstoneG14.Repositories.Implementations
                     await _context.SaveChangesAsync();
                     pedidoGenerado=pedido;
                     transaction.Commit();
-                }catch(Exception ex){
+                }catch(Exception){
                     transaction.Rollback();
-                    throw ex;
+                    throw;
                 }
             }
             return pedidoGenerado;
@@ -55,9 +49,27 @@ namespace CapstoneG14.Repositories.Implementations
               dp.IdPedidoNavigation.FechaRegistro.Value.Date<=fechaFin.Date).ToListAsync();
             return reporte;
         }
-        public Task<Pedido> ActualizarEstado(int idPedido, bool estado)
+        public async Task<Pedido> ActualizarEstado(Pedido pedido)
         {
-            throw new NotImplementedException();
+            Pedido pedidoEditado=new();
+            using(var transaction=_context.Database.BeginTransaction()){
+                try{
+                     foreach(DetallePedido dp in pedido.DetallePedidos){
+                        Libro libroEncontrado=await _context.Libros.Where(l=>l.IdLibro==dp.IdLibro).FirstAsync();
+                        libroEncontrado.Stock+=dp.Cantidad;
+                        _context.Libros.Update(libroEncontrado);
+                        await _context.SaveChangesAsync();
+                        }
+                    _context.Pedidos.Update(pedido);
+                    await _context.SaveChangesAsync();
+                    pedidoEditado=pedido;
+                    transaction.Commit();
+                }catch(Exception){
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+          return pedidoEditado;
         }
     }
 }

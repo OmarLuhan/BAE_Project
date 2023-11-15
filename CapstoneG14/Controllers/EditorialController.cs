@@ -58,7 +58,7 @@ namespace CapstoneG14.Controllers
         [HttpPut("Editar")]
         public async Task<IActionResult> Editar([FromBody] VMEditorial modelo)
         {
-            GenericResponse<VMEditorial> gResponse = new GenericResponse<VMEditorial>();
+            GenericResponse<VMEditorial> gResponse = new();
             try
             {
                 Editorial editorial_editado = await _editorialService.Editar(_mapper.Map<Editorial>(modelo));

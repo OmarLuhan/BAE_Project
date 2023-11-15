@@ -8,5 +8,6 @@ namespace CapstoneG14.Services.Interfaces
         Task<Pedido> Registrar(Pedido pedido);
         Task<Pedido>Detalle(string numeroPedido);
         Task<List<Pedido>> Historial(string numeroPedido, string fechaInicio, string fechaFin);
+        Task <Pedido> ActualizarEstado(string numeroPedido, bool estado);
     }
 }

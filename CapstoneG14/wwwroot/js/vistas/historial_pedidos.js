@@ -103,6 +103,13 @@ $("#tbpedido tbody").on("click", ".btn-info", function () {
   $("#txtUsuarioRegistro").val(d.usuario);
   $("#txtTipoDocumento").val(d.tipoDocumentoPedido);
   $("#txtTienda").val(d.tienda);
+  if (d.estado == 0) {
+    $("#cboEstado").removeAttr("disabled");
+    $("#guardarCambio").removeAttr("hidden");
+  } else {
+    $("#cboEstado").attr("disabled", "disabled");
+    $("#guardarCambio").attr("hidden", true);
+  }
   $("#cboEstado").val(d.estado);
   $("#txtTotal").val(d.total);
   $("#tbProductos tbody").html("");
@@ -122,8 +129,24 @@ $("#tbpedido tbody").on("click", ".btn-info", function () {
   );
   $("#modalData").modal("show");
   $("#guardarCambio").click(() => {
-    if ($("#cboEstado").val() != 1) {
-      console.log("realizando patch");
-    }
+    $("#guardarCambio").LoadingOverlay("show");
+    fetch(
+      `/Pedido/ActualizarEstado?numeroPedido=${d.numeroPedido}&estado=${$(
+        "#cboEstado"
+      ).val()}`
+    )
+      .then((response) => {
+        $("#guardarCambio").LoadingOverlay("hide");
+        return response.ok ? response.json() : Promise.reject(response);
+      })
+      .then((responseJson) => {
+        if (responseJson.estado) {
+          toastr.success("", "Estado actualizado");
+          $("#modalData").modal("hide");
+          $("#btnBuscar").click();
+        } else {
+          toastr.warning("", "Ocurrio un error al actualizar el estado");
+        }
+      });
   });
 });

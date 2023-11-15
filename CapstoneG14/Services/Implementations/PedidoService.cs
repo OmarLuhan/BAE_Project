@@ -14,6 +14,21 @@ namespace CapstoneG14.Services.Implementations
         {
             _pedidoRepository = pedidoRepository;
         }
+
+        
+
+        public async Task<Pedido> ActualizarEstado(string numeroPedido, bool estado)
+        {
+             try{
+                IQueryable<Pedido> query=await _pedidoRepository.Consultar(p=>p.NumeroPedido==numeroPedido)??throw new TaskCanceledException("El pedido no existe");
+                Pedido pedido=query.Include(dp=>dp.DetallePedidos).First();
+                pedido.Estado=estado;
+                return await _pedidoRepository.ActualizarEstado(pedido);
+            }catch{
+                throw;
+            }
+        }
+
         public async Task<Pedido> Detalle(string numeroPedido)
         {
             IQueryable<Pedido> query = await _pedidoRepository.Consultar(p => p.NumeroPedido == numeroPedido);
