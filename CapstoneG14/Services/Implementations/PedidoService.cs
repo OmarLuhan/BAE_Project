@@ -4,19 +4,19 @@ using CapstoneG14.Models;
 using CapstoneG14.Repositories.Interfaces;
 using CapstoneG14.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using static CapstoneG14.Repositories.Interfaces.IGenericRepository;
 
 namespace CapstoneG14.Services.Implementations
 {
     public class PedidoService : IPedidoService
     {
         private readonly IPedidoRepository _pedidoRepository;
-        public PedidoService(IPedidoRepository pedidoRepository)
+        private readonly IGenericRepository<Libro> _libroRepository;
+        public PedidoService(IPedidoRepository pedidoRepository, IGenericRepository<Libro> libroRepository)
         {
             _pedidoRepository = pedidoRepository;
+            _libroRepository = libroRepository;
         }
-
-        
-
         public async Task<Pedido> ActualizarEstado(string numeroPedido, bool estado)
         {
              try{
@@ -62,6 +62,11 @@ namespace CapstoneG14.Services.Implementations
                  .Include(t=>t.IdTiendaNavigation)
                  .ToList();
             }
+        }
+
+        public Task<List<Libro>> ObtenerLibros(string busqueda)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Pedido>Registrar(Pedido pedido)

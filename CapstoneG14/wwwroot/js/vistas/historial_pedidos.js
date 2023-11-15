@@ -131,9 +131,12 @@ $("#tbpedido tbody").on("click", ".btn-info", function () {
   $("#guardarCambio").click(() => {
     $("#guardarCambio").LoadingOverlay("show");
     fetch(
-      `/Pedido/ActualizarEstado?numeroPedido=${d.numeroPedido}&estado=${$(
-        "#cboEstado"
-      ).val()}`
+      `/Pedido/ActualizarEstado?numeroPedido=${
+        d.numeroPedido
+      }&estado=${parseInt($("#cboEstado").val())}`,
+      {
+        method: "PUT",
+      }
     )
       .then((response) => {
         $("#guardarCambio").LoadingOverlay("hide");
@@ -141,8 +144,8 @@ $("#tbpedido tbody").on("click", ".btn-info", function () {
       })
       .then((responseJson) => {
         if (responseJson.estado) {
-          toastr.success("", "Estado actualizado");
           $("#modalData").modal("hide");
+          toastr.success("", "Estado actualizado");
           $("#btnBuscar").click();
         } else {
           toastr.warning("", "Ocurrio un error al actualizar el estado");

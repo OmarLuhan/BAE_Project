@@ -10,15 +10,17 @@ namespace CapstoneG14.Services.Implementations
     public class DashBoardService : IDashBoardService
     {
         private readonly IVentaRepository _ventaRepository;
+        private readonly IPedidoRepository _pedidoRepository;
         private readonly IGenericRepository<DetalleVentum> _detalleVentaRepository;
         private readonly IGenericRepository<Libro> _libroRepository;
         private readonly DateTime _fechaInicio = DateTime.Now;
-        public DashBoardService(IVentaRepository ventaRepository, IGenericRepository<DetalleVentum> detalleVentaRepository, IGenericRepository<Libro> libroRepository)
+        public DashBoardService(IVentaRepository ventaRepository, IGenericRepository<DetalleVentum> detalleVentaRepository, IGenericRepository<Libro> libroRepository, IPedidoRepository pedidoRepository)
         {
             _ventaRepository = ventaRepository;
             _detalleVentaRepository = detalleVentaRepository;
             _libroRepository = libroRepository;
             _fechaInicio = _fechaInicio.AddDays(-7);
+            _pedidoRepository = pedidoRepository;
         }
 
 
@@ -69,9 +71,15 @@ namespace CapstoneG14.Services.Implementations
             }
         }
 
-        public Task<int> PedidosRestantes()
+        public async Task<int> PedidosRestantes()
         {
-            return Task.FromResult(5);
+            try{
+                IQueryable<Pedido> query = await _pedidoRepository.Consultar(p => p.Estado == false);
+                int total = query.Count();
+                return total;
+            }catch{
+                throw;
+            }
         }
 
         public async Task<int> TotalVentasUltimaSemana()

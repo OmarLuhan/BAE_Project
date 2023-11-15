@@ -28,11 +28,13 @@ namespace CapstoneG14.Controllers
 
             try
             {
-                VMDashboard vmDashboard = new VMDashboard();
-                vmDashboard.TotalVentas = await _dashBoardService.TotalVentasUltimaSemana();
-                vmDashboard.TotalIngresos = await _dashBoardService.TotalIngresosUltimaSemana();
-                vmDashboard.TotalLibros = await _dashBoardService.TotalLibros();
-                vmDashboard.PedidosRestantes = await _dashBoardService.PedidosRestantes();
+                VMDashboard vmDashboard = new()
+                {
+                    TotalVentas = await _dashBoardService.TotalVentasUltimaSemana(),
+                    TotalIngresos = await _dashBoardService.TotalIngresosUltimaSemana(),
+                    TotalLibros = await _dashBoardService.TotalLibros(),
+                    PedidosRestantes = await _dashBoardService.PedidosRestantes()
+                };
 
                 List<VMVentasSemana> listaVentaSemana = new();
                 List<VMLibrosSemana> listaProductosSemana = new();

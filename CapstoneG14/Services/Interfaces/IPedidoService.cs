@@ -9,5 +9,6 @@ namespace CapstoneG14.Services.Interfaces
         Task<Pedido>Detalle(string numeroPedido);
         Task<List<Pedido>> Historial(string numeroPedido, string fechaInicio, string fechaFin);
         Task <Pedido> ActualizarEstado(string numeroPedido, bool estado);
+         Task<List<Libro>> ObtenerLibros(string busqueda);
     }
 }

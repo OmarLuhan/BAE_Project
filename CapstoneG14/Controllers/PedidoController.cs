@@ -67,11 +67,11 @@ namespace CapstoneG14.Controllers
             return StatusCode(StatusCodes.Status200OK, gResponse);
         }
         [HttpPut("ActualizarEstado")]
-        public async Task<IActionResult> ActualizarEstado(string numeroPedido, bool estado){
+        public async Task<IActionResult> ActualizarEstado(string numeroPedido, int estado){
             GenericResponse<VMPedido> gResponse = new();
             try
             {
-                Pedido pedido_editado = await _pedidoService.ActualizarEstado(numeroPedido, estado);
+                Pedido pedido_editado = await _pedidoService.ActualizarEstado(numeroPedido, Convert.ToBoolean(estado));
                 VMPedido modelo = _mapper.Map<VMPedido>(pedido_editado);
                 gResponse.Estado = true;
                 gResponse.Objeto = modelo;
