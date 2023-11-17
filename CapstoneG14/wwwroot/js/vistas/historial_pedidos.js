@@ -130,6 +130,10 @@ $("#tbpedido tbody").on("click", ".btn-info", function () {
   $("#modalData").modal("show");
   $("#guardarCambio").click(() => {
     $("#guardarCambio").LoadingOverlay("show");
+    if ($("#cboEstado").val() == "0") {
+      $("#guardarCambio").LoadingOverlay("hide");
+      return;
+    }
     fetch(
       `/Pedido/ActualizarEstado?numeroPedido=${
         d.numeroPedido

@@ -42,6 +42,12 @@ namespace CapstoneG14.Controllers
         {
             return View();
         }
+        [HttpGet("ObtenerLibros")]
+        public async Task<IActionResult> ObtenerLibros(string busqueda)
+        {
+            List<VMLibro> vmListaLibros = _mapper.Map<List<VMLibro>>(await _pedidoService.ObtenerLibros(busqueda));
+            return StatusCode(StatusCodes.Status200OK, vmListaLibros);
+        }
         [HttpPost("RegistrarPedido")]
         public async Task<IActionResult> RegistrarPedido([FromBody]VMPedido modelo)
         {
@@ -111,7 +117,6 @@ namespace CapstoneG14.Controllers
             var archivoPdf = _converter.Convert(pdf);
             return File(archivoPdf, "application/pdf");
         }
-
 
     }
 }

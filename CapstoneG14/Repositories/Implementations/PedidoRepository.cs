@@ -54,12 +54,14 @@ namespace CapstoneG14.Repositories.Implementations
             Pedido pedidoEditado=new();
             using(var transaction=_context.Database.BeginTransaction()){
                 try{
+                    if(pedido.Estado){
                      foreach(DetallePedido dp in pedido.DetallePedidos){
                         Libro libroEncontrado=await _context.Libros.Where(l=>l.IdLibro==dp.IdLibro).FirstAsync();
                         libroEncontrado.Stock+=dp.Cantidad;
                         _context.Libros.Update(libroEncontrado);
                         await _context.SaveChangesAsync();
                         }
+                    }
                     _context.Pedidos.Update(pedido);
                     await _context.SaveChangesAsync();
                     pedidoEditado=pedido;

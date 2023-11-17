@@ -17,7 +17,7 @@ public partial class Pedido
 
     public decimal Total { get; set; }
 
-    public bool? Estado { get; set; }
+    public bool Estado { get; set; }
 
     public DateTime? FechaRegistro { get; set; }
 

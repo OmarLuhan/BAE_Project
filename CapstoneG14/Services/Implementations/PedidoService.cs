@@ -23,6 +23,7 @@ namespace CapstoneG14.Services.Implementations
                 IQueryable<Pedido> query=await _pedidoRepository.Consultar(p=>p.NumeroPedido==numeroPedido)??throw new TaskCanceledException("El pedido no existe");
                 Pedido pedido=query.Include(dp=>dp.DetallePedidos).First();
                 pedido.Estado=estado;
+                pedido.FechaEntrega=DateTime.Now;
                 return await _pedidoRepository.ActualizarEstado(pedido);
             }catch{
                 throw;
@@ -60,13 +61,18 @@ namespace CapstoneG14.Services.Implementations
                   ).Include(t=>t.IdTipoDocumentoPedidoNavigation)
                  .Include(u=>u.IdUsuarioNavigation)
                  .Include(t=>t.IdTiendaNavigation)
+                 .Include(dp=>dp.DetallePedidos)
                  .ToList();
             }
         }
 
-        public Task<List<Libro>> ObtenerLibros(string busqueda)
+        public async Task<List<Libro>> ObtenerLibros(string busqueda)
         {
-            throw new NotImplementedException();
+             IQueryable<Libro> query = await _libroRepository.Consultar(
+                l => l.EsActivo == true && string.Concat(
+                l.CodigoBarra, l.Titulo, l.Autor).Contains(busqueda)
+                );
+            return query.Include(e => e.IdEditorialNavigation).Include(g => g.IdGeneroNavigation).ToList();
         }
 
         public async Task<Pedido>Registrar(Pedido pedido)

@@ -251,7 +251,7 @@ $("#tbdata tbody").on("click", ".btn-eliminar", function () {
       text: "una vez eliminado no podra recuperar el registro",
       type: "warning",
       showCancelButton: true,
-      confirmButtonClass: "btn-danger",
+      confirmButtonClass: "btn-warning",
       confirmButtonText: "Si, eliminar!",
       cancelButtonText: "No, cancelar!",
       closeOnConfirm: false,
