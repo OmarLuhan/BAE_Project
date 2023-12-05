@@ -15,7 +15,7 @@ namespace CapstoneG14.Dependences
         {
             service.AddDbContext<BaeContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("Context"));
+                options.UseSqlServer(configuration.GetConnectionString("Context2"));
             });
             service.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             service.AddScoped<IVentaRepository, VentaRepository>();

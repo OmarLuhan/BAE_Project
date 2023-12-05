@@ -24,12 +24,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 builder.Services.Injection(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
-#region DinkToPdf
-// aqui se inyecta el assembly
-var context = new CustomAssemblyLoadContext();
-context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Utilities/LibreriaPDF/libwkhtmltox.dll"));
-builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
-#endregion
+// #region DinkToPdf
+// // aqui se inyecta el assembly
+// var context = new CustomAssemblyLoadContext();
+// context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Utilities/LibreriaPDF/libwkhtmltox.dll"));
+// builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+// #endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -51,4 +51,4 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Acceso}/{action=Login}/{id?}");
 
-app.Run($"http://0.0.0.0:5000");
+app.Run();

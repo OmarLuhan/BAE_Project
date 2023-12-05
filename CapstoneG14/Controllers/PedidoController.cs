@@ -20,14 +20,14 @@ namespace CapstoneG14.Controllers
         private readonly IPedidoService _pedidoService;
          private readonly ITipoDocumentoVentaService _tipoDocumentoVentaService;
         private readonly IMapper _mapper;
-        private readonly IConverter _converter;
+       // private readonly IConverter _converter;
 
-        public PedidoController(ILogger<PedidoController> logger, IPedidoService pedidoService, IMapper mapper, IConverter converter, ITipoDocumentoVentaService tipoDocumentoVentaService)
+        public PedidoController(ILogger<PedidoController> logger, IPedidoService pedidoService, IMapper mapper,/* IConverter converter,*/ ITipoDocumentoVentaService tipoDocumentoVentaService)
         {
             _logger = logger;
             _pedidoService = pedidoService;
             _mapper = mapper;
-            _converter = converter;
+          //  _converter = converter;
             _tipoDocumentoVentaService = tipoDocumentoVentaService;
         }
         [ClaimRequirement("Pedido", "NuevoPedido")]
@@ -96,27 +96,27 @@ namespace CapstoneG14.Controllers
             List<VMPedido> vmHistorialPedido = _mapper.Map<List<VMPedido>>(await _pedidoService.Historial(numeroPedido, fechaInicio, fechaFin));
             return StatusCode(StatusCodes.Status200OK, vmHistorialPedido);
         }
-         [HttpGet("MostrarPdfPedido")]
-        public IActionResult MostrarPdfPedido(string numeroPedido)
-        {
-            string urlPlantillaVista = $"{Request.Scheme}://{this.Request.Host}/Plantilla/PdfPedido?numeroPedido={numeroPedido}";
-            var pdf = new HtmlToPdfDocument()
-            {
-                GlobalSettings = new GlobalSettings()
-                {
-                    PaperSize = PaperKind.A4,
-                    Orientation = Orientation.Portrait
-                },
-                Objects ={
-                    new ObjectSettings()
-                    {
-                        Page= urlPlantillaVista
-                    }
-                }
-            };
-            var archivoPdf = _converter.Convert(pdf);
-            return File(archivoPdf, "application/pdf");
-        }
+        //  [HttpGet("MostrarPdfPedido")]
+        // public IActionResult MostrarPdfPedido(string numeroPedido)
+        // {
+        //     string urlPlantillaVista = $"{Request.Scheme}://{this.Request.Host}/Plantilla/PdfPedido?numeroPedido={numeroPedido}";
+        //     var pdf = new HtmlToPdfDocument()
+        //     {
+        //         GlobalSettings = new GlobalSettings()
+        //         {
+        //             PaperSize = PaperKind.A4,
+        //             Orientation = Orientation.Portrait
+        //         },
+        //         Objects ={
+        //             new ObjectSettings()
+        //             {
+        //                 Page= urlPlantillaVista
+        //             }
+        //         }
+        //     };
+        //     var archivoPdf = _converter.Convert(pdf);
+        //     return File(archivoPdf, "application/pdf");
+        // }
 
     }
 }
