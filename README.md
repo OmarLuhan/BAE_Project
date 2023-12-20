@@ -1,4 +1,24 @@
-# CapstoneG14
+# BAE
+<p>
+  Diseño e implementacion de un sistema web para
+  la gestion del proceso de ventas en la 
+  distribuidora Bae
+</p>
+
+>[!NOTE]
+>  TECNOLOGIAS USADAS
+>
+>| C#   | .NET     | SQL Server  |
+>|------|----------|-------------|
+>| JS   | jQuery   | Bootstrap   |
+>| HTML | Razor    | CSS         |
+>
+> HERRAMIENTAS
+>
+>| VSCode | SSMS  | Sdk .Net 7 |
+>|--------|-------|------------|
+
+
 
 #dotnet new mvc
 
