@@ -1,22 +1,4 @@
 # CapstoneG14
->[!NOTE]
->escribir una nota
->
-
->[!TIP]
->escribir un tip
->
-
->[!IMPORTANT]
->escribir algo importante
->
-
->[!WARNING]
->escribir una advertencia
-
->[!CAUTION]
->escribir una advertencia mayor
->
 
 #dotnet new mvc
 
@@ -45,8 +27,27 @@ dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version
 
 # generar pdf
 
+
+
+
 dotnet add package DinkToPDF
 son necesarias las librerias que
 se encuentran en LibreriaPDF Y
 Las extenciones que se encuentran en
 Extenciones
+
+
+>[!NOTE]
+>Esto es una nota importante que debes tener en cuenta.
+
+>[!TIP]
+>Aquí tienes un consejo útil para mejorar tu código.
+
+>[!IMPORTANT]
+>Por favor, ten en cuenta que esta acción es irreversible.
+
+>[!WARNING]
+>Este procedimiento puede causar la pérdida de datos. ¡Ten cuidado!
+
+>[!CAUTION]
+>¡Advertencia! Este proceso puede afectar el rendimiento del sistema.
