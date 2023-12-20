@@ -12,11 +12,34 @@
 >|------|----------|-------------|
 >| JS   | jQuery   | Bootstrap   |
 >| HTML | Razor    | CSS         |
+>| GIT  |GitHub    |             |
 >
 > HERRAMIENTAS
 >
 >| VSCode | SSMS  | Sdk .Net 7 |
 >|--------|-------|------------|
+
+>[!IMPORTANT]
+>COMO LEVANTAR EL SERVICIO EN MODO DESARROLO
+
+>[!WARNING]
+> ANTES DE INICIAR 
+>
+>1.Tener instalado visual studio code
+>
+>2.Tener instalado git y tener cuenta en git hub
+>
+>3.Tener instalado el sdk .NET7
+>
+>4.Tener instalado o tener acceso a una instancia de
+>base de datos SQL server
+>
+>5.Tener instalado el SSMS SQL Server Management Studio
+
+>[!TIP]
+> ESTAS LISTO ? EMPECEMOS
+>
+>1.Ingresar a https://github.com/mike-upn/BAE_Project
 
 
 
