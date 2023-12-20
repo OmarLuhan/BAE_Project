@@ -39,7 +39,9 @@
 >[!TIP]
 > ESTAS LISTO ? EMPECEMOS
 >
->1.Ingresar a https://github.com/mike-upn/BAE_Project
+>1.Clonar el repositorio usando el comando git clone
+>
+>2. Navegar hacia la carpeta Capstone/fa
 
 
 
