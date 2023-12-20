@@ -41,7 +41,15 @@
 >
 >1.Clonar el repositorio usando el comando git clone
 >
->2. Navegar hacia la carpeta Capstone/fa
+>2. Navegar hacia la carpeta CapstoneG14/
+>   
+>3. Inglesar el comando dotnet restore
+>
+>4. Ingresar en la instancia de la base de datos SQL server
+>
+>5. Ejecutar los scripts que se encuentran en la caprpeta CapstoneG14/Data/
+>
+>6. 
 
 
 
