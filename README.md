@@ -1,7 +1,24 @@
 # CapstoneG14
-![Warning]
+>[!NOTE]
+>escribir una nota
+>
 
-dotnet new mvc
+>[!TIP]
+>escribir un tip
+>
+
+>[!IMPORTANT]
+>escribir algo importante
+>
+
+>[!WARNING]
+>escribir una advertencia
+
+>[!CAUTION]
+>escribir una advertencia mayor
+>
+
+#dotnet new mvc
 
 # orm de sql server
 
