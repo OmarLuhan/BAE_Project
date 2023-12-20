@@ -1,5 +1,5 @@
 # CapstoneG14
-[!important]
+[warning]
 
 dotnet new mvc
 
