@@ -1,9 +1,11 @@
 # BAE
-<p>
-  Diseño e implementacion de un sistema web para
-  la gestion del proceso de ventas en la 
-  distribuidora Bae
-</p>
+>[!NOTE]
+>
+><p>
+ > Diseño e implementacion de un sistema web para
+ > la gestion del proceso de ventas en la 
+ > distribuidora Bae
+></p>
 
 >[!NOTE]
 >  TECNOLOGIAS USADAS
@@ -73,7 +75,7 @@
 >15. Logueate con las credenciales N00209455@upn.pe 123
 >
 
->[!CAUTION]
+>[!WARNING]
 >CONFIGURACION DE APIS
 >1. Despues de ejecutar los scripts
 >
@@ -106,7 +108,7 @@
 >6. Reemplazar los valores por los que se enuentran dentro del archivo de
 >   configApis
 
->[!IMPORTANT]
+>[!CAUTION]
 >  QUE HACER SI NO ENCUENTRO EL ARCHIVO configApis?
 >
 >  LAS APIS NO FUNCIONAN?
@@ -118,42 +120,28 @@
 > INSTRUCCIONES PARA CONSGUIR NUEVAS APIS
 >
 
+>[!NOTE]
+> PAQUETES UTILIZADOS
+>
+>1. dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+>2. dotnet add package Microsoft.EntityFrameworkCore.Tools
+>3. dotnet tool install --global dotnet-ef
+>4. dotnet add package Firebase.Auth
+>5. dotnet add package FirebaseStorage.net
+>6. dotnet add package AutoMapper
+>7. dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+>8. dotnet add package DinkToPDF , Librerias que se encuetran en:
+>   CapstoneG14/Utilities/LibreriaPDF  y extenciones que se encuentran en :CapstoneG14/Utilities/Extenciones 
+
+>[!IMPORTANT]
+> COMO HACER SCAFFOLD
+>
+>1. dotnet ef dbcontext scaffold "Server=server_name;Database=bd_name;User=sa;Password=password;Trusted_Connection=False;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+>
+>
+
+
 #dotnet new mvc
-
-# orm de sql server
-
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-dotnet add package Microsoft.EntityFrameworkCore.Tools
-
-# dotnet-ef
-
-dotnet tool install --global dotnet-ef
-
-# cadena de conexion
-
-dotnet ef dbcontext scaffold "Server=server_name;Database=bd_name;User=sa;Password=password;Trusted_Connection=False;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
-
-# firebase
-
-dotnet add package Firebase.Auth --version 1.0.0
-dotnet add package FirebaseStorage.net --version 1.0.3
-
-# automaper
-
-dotnet add package AutoMapper --version 12.0.1
-dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection --version 8.0.1
-
-# generar pdf
-
-
-
-
-dotnet add package DinkToPDF
-son necesarias las librerias que
-se encuentran en LibreriaPDF Y
-Las extenciones que se encuentran en
-Extenciones
-
 
 >[!NOTE]
 >Esto es una nota importante que debes tener en cuenta.
