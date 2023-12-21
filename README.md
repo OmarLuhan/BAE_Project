@@ -39,17 +39,40 @@
 >[!TIP]
 > ESTAS LISTO ? EMPECEMOS
 >
->1.Clonar el repositorio usando el comando git clone
+>1. Clonar el repositorio usando el comando git clone
 >
 >2. Navegar hacia la carpeta CapstoneG14/
 >   
->3. Inglesar el comando dotnet restore
+>3. Ingresar el comando dotnet restore
 >
 >4. Ingresar en la instancia de la base de datos SQL server
 >
->5. Ejecutar los scripts que se encuentran en la caprpeta CapstoneG14/Data/
+>5.  Revisar los scripts que se encuentran en la carpeta CapstoneG14/Data/;
+>    encontraras 3 scrpts, el primero es el esquema de la base de dados, el segundo
+>    son los inserts con datos iniciales para que el sitema pueda funcionar, y el tercero es 
+>    un script con el esquema, datos iniciales, y datos de prueba todo en uno
 >
->6. 
+>6. Ejecutar el script del esquema y el script de inserts iniciales
+>
+>7. Puedes elgir ejecutar el script todo en uno, si haces esto pasar al punto 9
+>
+>8. Cambiar las configuracion de las apis [ir a configuracion de apis]
+>
+>9. Regresar la carpeta CapstoneG14/appsettings.json
+>
+>10. Cambiar la cadena de conexion por la del servidor actual de bd
+>
+>11. Ejecutar el comando dotnet clear (no es obligatorio pero puede resolver problemas)
+>
+>12. Ejecutar el comando dotnet build
+>
+>13. Ejecutar el comando dotnet run
+>
+>14. Ya tienes corriendo la palicacion web
+>
+>15. Logueate con las credenciales N00209455@upn.pe 123
+>
+
 
 
 
