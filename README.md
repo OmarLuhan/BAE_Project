@@ -137,11 +137,10 @@
 > COMO HACER SCAFFOLD
 >
 >1. dotnet ef dbcontext scaffold "Server=server_name;Database=bd_name;User=sa;Password=password;Trusted_Connection=False;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
->
->
 
-
-#dotnet new mvc
+>[!NOTE]
+>COMO CREAR UN NUEVO PROYECTO MVC
+>1. dotnet new mvc
 
 >[!NOTE]
 >Esto es una nota importante que debes tener en cuenta.
