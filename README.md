@@ -58,7 +58,7 @@
 >
 >8. Cambiar las configuracion de las apis [ir a configuracion de apis]
 >
->9. Regresar la carpeta CapstoneG14/appsettings.json
+>9. Regresar a la carpeta CapstoneG14/appsettings.json
 >
 >10. Cambiar la cadena de conexion por la del servidor actual de bd
 >
@@ -73,8 +73,50 @@
 >15. Logueate con las credenciales N00209455@upn.pe 123
 >
 
+>[!CAUTION]
+>CONFIGURACION DE APIS
+>1. Despues de ejecutar los scripts
+>
+>2. Realizar un select from * configuracion
+>   se mostrara una tabla con 3 columnas
+>
+>| recurso         | propiedad    | valor |
+>|-----------------|--------------|-------|
+>| Firebase_storage| email        | xxxxx |
+>| Firebase_storage| clave        | xxxxx |
+>| Firebase_storage| ruta         |xxx.com|
+>| Firebase_storage| api_key      |xxxxxxx|
+>| Servicio_Correo | correo       |xxxxxxx|
+>| Servicio_Correo | clave        |xxxxxxx|
+>| Servicio_Correo | alias        |xxxxxxx|
+>
+>4. Revisar el archivo configApis
+>
+>5. Para el recurso servio_Correo:
+>   correo [Es el correo con el cual esta configurado el servicio]
+>   clave  [Es la contraseña de de aplicacion del correo]
+>   alias  [Es el nobre con el que te llegara el correo, no es obligatorio cambiarlo]
+>
+>7. Para el recurso de Firebase_Storage
+> email[Es un usuario con el cual nos vamos a autenticar en el servicio de firebase]
+> clave[es la contraseña del usuario para ingresar al servicio de firebase]
+> ruta[Es la ruta fisica en donde se encuentra el storage]
+>  api_key[Es la llave con la cual ingresamos al sevicio de storage]
+>
+>6. Reemplazar los valores por los que se enuentran dentro del archivo de
+>   configApis
 
+>[!IMPORTANT]
+>  QUE HACER SI NO ENCUENTRO EL ARCHIVO configApis?
+>
+>  LAS APIS NO FUNCIONAN?
+>
+>  COMO CONSIGO NUEVAS APIS?
+>
 
+>[!TIP]
+> INSTRUCCIONES PARA CONSGUIR NUEVAS APIS
+>
 
 #dotnet new mvc
 
