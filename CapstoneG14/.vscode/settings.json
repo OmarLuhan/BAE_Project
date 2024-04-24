@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/b3a9338d-bef3-49ac-be69-3040e8f92842/resourceGroups/BaeProject/providers/Microsoft.Web/sites/webBae",
-    "appService.deploySubpath": "bin\\Publish"
-}

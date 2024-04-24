@@ -1,5 +1,5 @@
 obj
 bin
 out
-
 node_modules
+.vscode
