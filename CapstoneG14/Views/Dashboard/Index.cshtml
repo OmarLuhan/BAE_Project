@@ -2,18 +2,14 @@
     ViewData["Title"] = "DashBoard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
     </div>
-
     <!-- Content Row -->
     <div class="row">
-
         <!-- Total de ventas -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -32,7 +28,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Total de Ingresos -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
@@ -51,7 +46,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Total de Productos -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-info shadow h-100 py-2">
@@ -70,9 +64,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <!-- Total de Categorias -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
@@ -92,11 +83,8 @@
             </div>
         </div>
     </div>
-
     <!-- Content Row -->
-
     <div class="row">
-
         <!-- Area Chart - Ventas de los ultimos 7 días -->
         <div class="col-xl-8 col-lg-7">
             <div class="card shadow mb-4">
@@ -112,7 +100,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Pie Chart - Productos más vendidos-->
         <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
@@ -129,12 +116,11 @@
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 
 @section Scripts {
     <script src="~/vendor/chart.js/Chart.min.js"></script>
-    <script src="../js/Vistas/DashBoard_index.js"></script>
+    <script src="~/js/Vistas/DashBoard_index.js"></script>
 
 };

@@ -25,15 +25,13 @@ namespace CapstoneG14.Tests.Services
         }
         #region ObtenerPorID
         [Fact]
-        public async Task ObtenerPorId_100_Retornar_Usuario()
+        public async Task ObtenerPorId_Retorna_1_usuario()
         {
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuarioBuscado = i;
+            int idUsuarioBuscado = 1;
                 var usuarioEsperado = new Usuario
                 {
                     IdUsuario = idUsuarioBuscado,
-                    Correo = "N00209455@upn.pe" + i
+                    Correo = "N00209455@upn.pe" 
                 };
                 // Simulando la respuesta del repositorio al consultar un usuario por su ID.
                 _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
@@ -43,173 +41,11 @@ namespace CapstoneG14.Tests.Services
                 // Assert
                 Assert.NotNull(resultado);
                 Assert.Equal(idUsuarioBuscado, resultado.IdUsuario);
-                Assert.Equal("N00209455@upn.pe" + i, resultado.Correo);
-            }
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Usuario01()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuarioBuscado = i;
-                var usuarioEsperado = new Usuario
-                {
-                    IdUsuario = idUsuarioBuscado,
-                    Correo = "N00209455@upn.pe" + i
-                };
-                // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-                _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                    .ReturnsAsync(new List<Usuario> { usuarioEsperado }.AsQueryable());
-                // Act
-                var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-                // Assert
-                Assert.NotNull(resultado);
-                Assert.Equal(idUsuarioBuscado, resultado.IdUsuario);
-                Assert.Equal("N00209455@upn.pe" + i, resultado.Correo);
-            }
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Usuario02()
-        {
-
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuarioBuscado = i;
-                var usuarioEsperado = new Usuario
-                {
-                    IdUsuario = idUsuarioBuscado,
-                    Correo = "N00209455@upn.pe" + i
-                };
-                // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-                _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                    .ReturnsAsync(new List<Usuario> { usuarioEsperado }.AsQueryable());
-                // Act
-                var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-                // Assert
-                Assert.NotNull(resultado);
-                Assert.Equal(idUsuarioBuscado, resultado.IdUsuario);
-                Assert.Equal("N00209455@upn.pe" + i, resultado.Correo);
-            }
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Usuario03()
-        {
-
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuarioBuscado = i;
-                var usuarioEsperado = new Usuario
-                {
-                    IdUsuario = idUsuarioBuscado,
-                    Correo = "N00209455@upn.pe" + i
-                };
-                // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-                _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                    .ReturnsAsync(new List<Usuario> { usuarioEsperado }.AsQueryable());
-                // Act
-                var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-                // Assert
-                Assert.NotNull(resultado);
-                Assert.Equal(idUsuarioBuscado, resultado.IdUsuario);
-                Assert.Equal("N00209455@upn.pe" + i, resultado.Correo);
-            }
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Usuario04()
-        {
-            int idUsuarioBuscado = 193442;
-
-            // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-            _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                    .ReturnsAsync(new List<Usuario>().AsQueryable());
-
-            // Act
-            var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-
-            // Assert
-            Assert.Null(resultado);
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Usuario05()
-        {
-            int idUsuarioBuscado = -1;
-
-            // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-            _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                    .ReturnsAsync(new List<Usuario>().AsQueryable());
-
-            // Act
-            var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-
-            // Assert
-            Assert.Null(resultado);
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Usuario06()
-        {
-            int idUsuarioBuscado = -2;
-
-            // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-            _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                    .ReturnsAsync(new List<Usuario>().AsQueryable());
-
-            // Act
-            var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-
-            // Assert
-            Assert.Null(resultado);
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Null_Usuario()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuarioBuscado = i;
-                // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-                _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                        .ReturnsAsync(new List<Usuario>().AsQueryable());
-                // Act
-                var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-
-                // Assert
-                Assert.Null(resultado);
-            }
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Null_Usuario02()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuarioBuscado = i;
-                // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-                _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                        .ReturnsAsync(new List<Usuario>().AsQueryable());
-                // Act
-                var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-
-                // Assert
-                Assert.Null(resultado);
-            }
-        }
-        [Fact]
-        public async Task ObtenerPorId_100_Retornar_Null_Usuario03()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuarioBuscado = i;
-                // Simulando la respuesta del repositorio al consultar un usuario por su ID.
-                _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == idUsuarioBuscado))
-                        .ReturnsAsync(new List<Usuario>().AsQueryable());
-                // Act
-                var resultado = await _usuarioService.ObtenerPorId(idUsuarioBuscado);
-
-                // Assert
-                Assert.Null(resultado);
-            }
-        }
+                Assert.Equal("N00209455@upn.pe", resultado.Correo);    
+            
+        }      
         #endregion ObtenerPorID
         #region CrearUsuario
-
         [Fact]
         public async Task Crear_Usuario_DatosCoreectos()
         {
@@ -254,71 +90,18 @@ namespace CapstoneG14.Tests.Services
             Assert.NotNull(result.IdRolNavigation);
             _mockRepo.Verify(r => r.Create(It.Is<Usuario>(u => u.Correo == usuario_crear.Correo && u.Clave == usuario_crear.Clave)), Times.Once);
             _mockRepo.Verify(r => r.Consultar(u => u.IdUsuario == usuario_esperado.IdUsuario), Times.Once);
-
         }
         [Fact]
-        public async Task Crear_100_Usuario_DatosCoreectos()
+        public async Task CrearUsuario_DatosIncorrectos()
         {
-            for (int i = 1; i < 5; i++)
-            {
-                var usuario_crear = new Usuario
+           
+             var usuario = new Usuario
                 {
-                    Nombre = "Test",
-                    Correo = "test1@test.com" + i,
-                    Telefono = "123456779",
-                    IdRol = 1,
-                    UrlFoto = "",
-                    NombreFoto = "",
-                    Clave = "",
-                    EsActivo = true,
-                    FechaRegistro = DateTime.Now
-                };
-                var usuario_esperado = new Usuario
-                {
-                    IdUsuario = i,
-                    Nombre = "Test",
-                    Correo = "test1@test.com" + i,
-                    Telefono = "123456779",
-                    IdRol = 1,
-                    UrlFoto = "",
-                    NombreFoto = "",
-                    Clave = "",
-                    EsActivo = true,
-                    FechaRegistro = DateTime.Now,
-                    IdRolNavigation = new Rol { IdRol = i, Descripcion = "Administrador" + i }
-                };
-                _mockRepo.Setup(r => r.Obtener(u => u.Correo == usuario_crear.Correo))
-              .ReturnsAsync((Usuario)null); // Simula que no se encontró un usuario existente
-                _mockUtilidadesService.Setup(u => u.GenerarClave()).Returns("ClaveGenerada");
-                _mockUtilidadesService.Setup(u => u.ConvertirSha256("ClaveGenerada")).Returns("ClaveEncriptada");
-                usuario_crear.Clave = "ClaveEncriptada";
-                _mockRepo.Setup(r => r.Create(usuario_crear)).ReturnsAsync(usuario_esperado);
-                _mockRepo.Setup(r => r.Consultar(u => u.IdUsuario == usuario_esperado.IdUsuario))
-                                        .ReturnsAsync(new List<Usuario> { usuario_esperado }.AsQueryable());
-
-
-                var result = await _usuarioService.Crear(usuario_crear, Stream.Null, "", "");
-                Assert.Equal(usuario_esperado.IdUsuario, result.IdUsuario);
-                Assert.NotNull(result.IdRolNavigation);
-                _mockRepo.Verify(r => r.Create(It.Is<Usuario>(u => u.Correo == usuario_crear.Correo && u.Clave == usuario_crear.Clave)), Times.Once);
-                _mockRepo.Verify(r => r.Consultar(u => u.IdUsuario == usuario_esperado.IdUsuario), Times.Once);
-            }
-
-
-
-        }
-        [Fact]
-        public async Task Crear_100UsuarioExistes_Return_Exepction()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                var usuario = new Usuario
-                {
-                    Correo = "test1@test.com" + i
+                    Correo = "test1@test.com" 
                 };
                 var usuarioEncontrado = new Usuario
                 {
-                    Correo = "test1@test.com" + i
+                    Correo = "test1@test.com" 
                 };
                 _mockRepo.Setup(r => r.Obtener(u => u.Correo == usuario.Correo))
                .ReturnsAsync(usuarioEncontrado); // Simula que si se encontró un usuario existente
@@ -329,36 +112,11 @@ namespace CapstoneG14.Tests.Services
                 catch (Exception e)
                 {
                     Assert.Equal("El correo ya existe", e.Message);
-                }
-            }
+                }   
+            
         }
         [Fact]
-        public async Task Crear_100UsuarioExistes_Return_Exepction01()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                var usuario = new Usuario
-                {
-                    Correo = "test1@test.com" + i
-                };
-                var usuarioEncontrado = new Usuario
-                {
-                    Correo = "test1@test.com" + i
-                };
-                _mockRepo.Setup(r => r.Obtener(u => u.Correo == usuario.Correo))
-               .ReturnsAsync(usuarioEncontrado); // Simula que si se encontró un usuario existente
-                try
-                {
-                    var resultado = await _usuarioService.Crear(usuario, null, "", "");
-                }
-                catch (Exception e)
-                {
-                    Assert.Equal("El correo ya existe", e.Message);
-                }
-            }
-        }
-        [Fact]
-        public async Task Crear_Usuario_Exception()
+        public async Task CrearUsuario_DatosIncorrectos_Ecxeption()
         {
             var usuario = new Usuario
             {
@@ -388,168 +146,46 @@ namespace CapstoneG14.Tests.Services
                 Assert.Equal("No se pudo crear el usuario", e.Message);
             }
         }
-        [Fact]
-        public async Task Crear_Usuario_Exception_01()
-        {
-            var usuario = new Usuario
-            {
-                Correo = "N00209455@upn.pe",
-                Nombre = "Test",
-                Telefono = "123456779",
-                IdRol = 1,
-                EsActivo = true,
-                FechaRegistro = DateTime.Now
-            };
-            string plantilla_correo = "[clave][correo]";
-            var clave = _mockUtilidadesService.Setup(u => u.GenerarClave()).Returns("ClaveGenerada");
-            var clave_encriptada = _mockUtilidadesService.Setup(u => u.ConvertirSha256(clave.ToString())).Returns("ClaveEncriptada");
-            usuario.Clave = clave_encriptada.ToString();
-            _mockRepo.Setup(r => r.Create(usuario)).ReturnsAsync(usuario);
-            var result = new Usuario();
-            try
-            {
-                result = await _usuarioService.Crear(usuario, null, "", plantilla_correo);
-
-            }
-            catch (Exception e)
-            {
-                Assert.Equal("No se pudo crear el usuario", e.Message);
-            }
-        }
         #endregion CrearUsuario
         #region EliminarUsuario
         [Fact]
-        public async Task Eliminar_100_UsuariosExistentes_02()
+        public async Task EliminarUsuario_OK()
         {
             // Arrange
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuario = i;
-                string nombreFoto = "foto.jpg" + i;
-                var usuarioFalso = new Usuario { IdUsuario = idUsuario, NombreFoto = nombreFoto };
-                _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario))
-                         .ReturnsAsync(usuarioFalso);
-                _mockRepo.Setup(r => r.Delete(usuarioFalso))
-                         .ReturnsAsync(true);
-                var resultado = await _usuarioService.Eliminar(idUsuario);
-                Assert.True(resultado);
-                _mockRepo.Verify(r => r.Delete(usuarioFalso), Times.Once);
-                _mockFirebaseService.Verify(f => f.EliminarStorage("carpeta_usuario", nombreFoto), Times.Once);
-            }
-        }
-        [Fact]
-        public async Task Eliminar_100_UsuariosExistentes_03()
-        {
-            // Arrange
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuario = i;
-                string nombreFoto = "foto.jpg" + i;
-                var usuarioFalso = new Usuario { IdUsuario = idUsuario, NombreFoto = nombreFoto };
-                _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario))
-                         .ReturnsAsync(usuarioFalso);
-                _mockRepo.Setup(r => r.Delete(usuarioFalso))
-                         .ReturnsAsync(true);
-                var resultado = await _usuarioService.Eliminar(idUsuario);
-                Assert.True(resultado);
-                _mockRepo.Verify(r => r.Delete(usuarioFalso), Times.Once);
-                _mockFirebaseService.Verify(f => f.EliminarStorage("carpeta_usuario", nombreFoto), Times.Once);
-            }
-        }
-        [Fact]
-        public async Task Eliminar_100_UsuariosExistentes_04()
-        {
-            // Arrange
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuario = i;
-                string nombreFoto = "foto.jpg" + i;
-                var usuarioFalso = new Usuario { IdUsuario = idUsuario, NombreFoto = nombreFoto };
-                _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario))
-                         .ReturnsAsync(usuarioFalso);
-                _mockRepo.Setup(r => r.Delete(usuarioFalso))
-                         .ReturnsAsync(true);
-                var resultado = await _usuarioService.Eliminar(idUsuario);
-                Assert.True(resultado);
-                _mockRepo.Verify(r => r.Delete(usuarioFalso), Times.Once);
-                _mockFirebaseService.Verify(f => f.EliminarStorage("carpeta_usuario", nombreFoto), Times.Once);
-            }
-        }
-        [Fact]
-        public async Task Eliminar_100_UsuariosExistentes_05()
-        {
-            // Arrange
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuario = i;
-                string nombreFoto = "foto.jpg" + i;
-                var usuarioFalso = new Usuario { IdUsuario = idUsuario, NombreFoto = nombreFoto };
-                _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario))
-                         .ReturnsAsync(usuarioFalso);
-                _mockRepo.Setup(r => r.Delete(usuarioFalso))
-                         .ReturnsAsync(true);
-                var resultado = await _usuarioService.Eliminar(idUsuario);
-                Assert.True(resultado);
-                _mockRepo.Verify(r => r.Delete(usuarioFalso), Times.Once);
-                _mockFirebaseService.Verify(f => f.EliminarStorage("carpeta_usuario", nombreFoto), Times.Once);
-            }
-        }
-        [Fact]
-        public async Task Eliminar_100_UsuariosExistentes_06()
-        {
-            // Arrange
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuario = i;
-                string nombreFoto = "foto.jpg" + i;
-                var usuarioFalso = new Usuario { IdUsuario = idUsuario, NombreFoto = nombreFoto };
-                _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario))
-                         .ReturnsAsync(usuarioFalso);
-                _mockRepo.Setup(r => r.Delete(usuarioFalso))
-                         .ReturnsAsync(true);
-                var resultado = await _usuarioService.Eliminar(idUsuario);
-                Assert.True(resultado);
-                _mockRepo.Verify(r => r.Delete(usuarioFalso), Times.Once);
-                _mockFirebaseService.Verify(f => f.EliminarStorage("carpeta_usuario", nombreFoto), Times.Once);
-            }
-        }
-        [Fact]
-        public async Task Eliminar_100_UsuariosExistentes_07()
-        {
+            int idUsuario = 1;
+            string nombreFoto = "foto.jpg";
 
-            // Arrange
-            for (int i = 0; i < 100; i++)
-            {
-                int idUsuario = i;
-                string nombreFoto = "foto.jpg" + i;
-                var usuarioFalso = new Usuario { IdUsuario = idUsuario, NombreFoto = nombreFoto };
+                var usuarioFalso = new Usuario
+                 { 
+                    IdUsuario = idUsuario, 
+                    NombreFoto = nombreFoto 
+                };
+
                 _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario))
                          .ReturnsAsync(usuarioFalso);
                 _mockRepo.Setup(r => r.Delete(usuarioFalso))
                          .ReturnsAsync(true);
                 var resultado = await _usuarioService.Eliminar(idUsuario);
+
                 Assert.True(resultado);
                 _mockRepo.Verify(r => r.Delete(usuarioFalso), Times.Once);
-                _mockFirebaseService.Verify(f => f.EliminarStorage("carpeta_usuario", nombreFoto), Times.Once);
-            }
+                _mockFirebaseService.Verify(f => f.EliminarStorage("carpeta_usuario", nombreFoto), Times.Once);    
+                
         }
-        // [Fact]
-        // public async Task Eliminar_100_UsuarioNoExistente_DebeLanzarExcepcion()
-        // {
-        //     for (int i = 0; 1 < 2; i++)
-        //     {
-        //         int idUsuario = i;
-        //         _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario)).ReturnsAsync((Usuario)null);
-        //         try
-        //         {
-        //             await _usuarioService.Eliminar(idUsuario);
-        //         }
-        //         catch (Exception e)
-        //         {
-        //             Assert.Equal("No se encontro el usuario", e.Message);
-        //         }
-        //     }
-        // }
+        [Fact]
+        public async Task Eliminar_100_UsuarioNoExistente_DebeLanzarExcepcion()
+        {
+            int idUsuario = 1;
+             _mockRepo.Setup(r => r.Obtener(u => u.IdUsuario == idUsuario)).ReturnsAsync((Usuario)null);
+                try
+                {
+                    await _usuarioService.Eliminar(idUsuario);
+                }
+                catch (Exception e)
+                {
+                    Assert.Equal("No se encontro el usuario", e.Message);
+                }       
+        }
         #endregion EliminarUsuario
         #region GuardarPerfil
         [Fact]

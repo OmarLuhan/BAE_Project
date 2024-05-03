@@ -65,8 +65,8 @@ $(document).ready(function () {
             datasets: [
               {
                 label: "Cantidad",
-                backgroundColor: "#4e73df",
-                hoverBackgroundColor: "#2e59d9",
+                backgroundColor: "#5b9a8b",
+                hoverBackgroundColor: "#427a6d",
                 borderColor: "#4e73df",
                 data: barchart_data,
               },
@@ -108,7 +108,7 @@ $(document).ready(function () {
             datasets: [
               {
                 data: piechart_data,
-                backgroundColor: ["#4e73df", "#1cc88a", "#36b9cc", "#FF785B"],
+                backgroundColor: ["#858796", "#5b9a8b", "#36b9cc", "#f6c23e "],
                 hoverBackgroundColor: [
                   "#2e59d9",
                   "#17a673",

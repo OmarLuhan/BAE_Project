@@ -95,15 +95,15 @@ public class HomeController : Controller
     public async Task<IActionResult> CambiarClave([FromBody] VMCambiarClave modelo)
     {
         GenericResponse<bool> response = new();
+        
         try
         {
             ClaimsPrincipal claimUser = HttpContext.User;
-            string idUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+            string? idUsuario = claimUser.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
             .Select(c => c.Value)
             .SingleOrDefault();
-
-            bool resultado = await _usuarioService.CambiarClave(int.Parse(idUsuario), modelo.ClaveActual, modelo.ClaveNueva);
-            response.Estado = resultado;
+             bool resultado = await _usuarioService.CambiarClave(int.Parse(idUsuario), modelo.ClaveActual, modelo.ClaveNueva);     
+             response.Estado = resultado;
         }
         catch (Exception ex)
         {
