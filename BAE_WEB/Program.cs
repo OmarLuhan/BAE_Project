@@ -1,5 +1,6 @@
 using BAE_WEB.Dependences;
 using BAE_WEB.Utils.AutoMapper;
+using BAE_WEB.Utils.Extenciones;
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -23,12 +24,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 builder.Services.Injection(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
-// #region DinkToPdf
-// // aqui se inyecta el assembly
-// var context = new CustomAssemblyLoadContext();
-// context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Utilities/LibreriaPDF/libwkhtmltox.dll"));
-// builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
-// #endregion
+#region DinkToPdf
+// aqui se inyecta el assembly
+var context = new CustomAssemblyLoadContext();
+context.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "Utils/LibreriaPDF/libwkhtmltox.dll"));
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
