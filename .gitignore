@@ -3,3 +3,4 @@ bin
 out
 node_modules
 .vscode
+.vs/
