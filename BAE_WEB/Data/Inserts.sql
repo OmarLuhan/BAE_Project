@@ -10,7 +10,7 @@ insert into rol(descripcion,esActivo) values
 --SELECT * FROM Usuario
 ----clave : 123
 insert into Usuario(nombre,correo,telefono,idRol,urlFoto,nombreFoto,clave,esActivo) values
-('omarlujan','syadmin@bae.com','909090',1,'','','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1)
+('omarlujan','sysadmin@bae.com','909090',1,'','','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1)
 
 --________________________________ RECURSOS DE FIREBASE_STORAGE Y CORREO ________________________________
 --(AQUI DEBES INCLUIR TUS PROPIAS CLAVES Y CRENDENCIALES)
