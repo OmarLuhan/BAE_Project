@@ -10,7 +10,7 @@ insert into rol(descripcion,esActivo) values
 --SELECT * FROM Usuario
 ----clave : 123
 insert into Usuario(nombre,correo,telefono,idRol,urlFoto,nombreFoto,clave,esActivo) values
-('omarlujan','n00209455@upn.pe','909090',1,'','','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1)
+('omarlujan','syadmin@bae.com','909090',1,'','','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3',1)
 
 --________________________________ RECURSOS DE FIREBASE_STORAGE Y CORREO ________________________________
 --(AQUI DEBES INCLUIR TUS PROPIAS CLAVES Y CRENDENCIALES)
@@ -18,15 +18,15 @@ insert into Usuario(nombre,correo,telefono,idRol,urlFoto,nombreFoto,clave,esActi
 insert into Configuracion(recurso,propiedad,valor) values
 ('FireBase_Storage','email','emailautorizado@gmail.com'),
 ('FireBase_Storage','clave','usuario123456789'),
-('FireBase_Storage','ruta','ventasasp-654.appspot.com'),
-('FireBase_Storage','api_key','AIzaSyDtIH3_BADYTwIBt9Z4D-UIkqI9ZFA'),
+('FireBase_Storage','ruta','ventasasp-6574.appspot.com'),
+('FireBase_Storage','api_key','AIzaSyDtIH3_BADYTwIBtcDm-UIkqI9ZFA'),
 ('FireBase_Storage','carpeta_usuario','IMAGENES_USUARIO'),
 ('FireBase_Storage','carpeta_producto','IMAGENES_PRODUCTO'),
 ('FireBase_Storage','carpeta_logo','IMAGENES_LOGO')
 
 insert into Configuracion(recurso,propiedad,valor) values
 ('Servicio_Correo','correo','serviciocorreo@gmail.com'),
-('Servicio_Correo','clave','cpznvfbofjbrvxxx'),
+('Servicio_Correo','clave','cpznvfbofjbrvgxx'),
 ('Servicio_Correo','alias','alias'),
 ('Servicio_Correo','host','smtp.gmail.com'),
 ('Servicio_Correo','puerto','587')
