@@ -40,8 +40,7 @@ $("#btnBuscar").click(function () {
     toastr.warning("", "El campo RUC debe ser numerico");
     return;
   }
-  const api_token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InY0MzcyODgzN0BnbWFpbC5jb20ifQ.qwmIuk4LueCl4XG802VV43uzJGleoAfztlS1n01uyC0";
+  const api_token = "token";
   $("#btnBuscar").LoadingOverlay("show");
   fetch(
     `https://dniruc.apisperu.com/api/v1/ruc/${documento}?token=${api_token}`
